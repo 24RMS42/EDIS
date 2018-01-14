@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:boardDetails="clr-namespace:EDIS.Shared.Pages.Boards.BoardDetails;assembly=EDIS.Shared"
+             x:Class="EDIS.Shared.Pages.Boards.BoardDetails.BoardDetailsPage">
+  <!--Pages can be added as references or inline-->
+    <boardDetails:CircuitsPage Title="Circuits"  BindingContext="{Binding CircuitsViewModel}"/>
+    <boardDetails:BasicInfoPage Title="Board Details" BindingContext="{Binding BasicInfoViewModel}"/>
+</TabbedPage>

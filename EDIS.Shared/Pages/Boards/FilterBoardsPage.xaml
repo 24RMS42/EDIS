@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EDIS.Shared.Pages.Boards.FilterBoardsPage">
+    <ContentPage.Content>
+        <StackLayout Padding="20">
+            <Grid>
+                <Grid VerticalOptions="FillAndExpand"  HorizontalOptions="End">
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding CloseCommand}"/>
+                    </Grid.GestureRecognizers>
+                    
+                    <Image  Source="close.png" HeightRequest="30"/>
+                </Grid>
+            </Grid>
+
+            <Frame BackgroundColor="White" 
+                   VerticalOptions="CenterAndExpand"
+                   HasShadow="False">
+            <StackLayout>
+                <Grid Style="{StaticResource ItemGrid}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="1"/>
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Row="0" Text="Board Type" Style="{StaticResource UpperLabel}"/>
+                    <Entry Grid.Row="1"  Text="{Binding Filters.BoardType}" Style="{StaticResource LowerEntry}"/>
+
+                </Grid>
+
+
+                <Grid Style="{StaticResource ItemGrid}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="1"/>
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Row="0" Text="Board Function" Style="{StaticResource UpperLabel}"/>
+                    <Entry Grid.Row="1"  Text="{Binding Filters.BoardFunction}" Style="{StaticResource LowerEntry}"/>
+
+                </Grid>
+
+                <Grid Style="{StaticResource ItemGrid}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="1"/>
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Row="0" Text="Board Section" Style="{StaticResource UpperLabel}"/>
+                    <Entry Grid.Row="1"  Text="{Binding Filters.BoardLocationBlock}" Style="{StaticResource LowerEntry}"/>
+                    <!--<BoxView Grid.Row="2" Color="#dfdfdf"/>-->
+                </Grid>
+
+                <Grid Style="{StaticResource ItemGrid}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="1"/>
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Row="0" Text="Board Floor" Style="{StaticResource UpperLabel}"/>
+                    <Entry Grid.Row="1"  Text="{Binding Filters.BoardLocationFloor}" Style="{StaticResource LowerEntry}"/>
+                    <!--<BoxView Grid.Row="2" Color="#dfdfdf"/>-->
+                </Grid>
+
+                <Grid Style="{StaticResource ItemGrid}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="1"/>
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Row="0" Text="Board Location" Style="{StaticResource UpperLabel}"/>
+                    <Entry Grid.Row="1"  Text="{Binding Filters.BoardLocation}" Style="{StaticResource LowerEntry}"/>
+                    <!--<BoxView Grid.Row="2" Color="#dfdfdf"/>-->
+                </Grid>
+            </StackLayout>
+            </Frame>
+
+            <Button Style="{StaticResource AppButton}" Text="List Boards" Command="{Binding SearchCommand}"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

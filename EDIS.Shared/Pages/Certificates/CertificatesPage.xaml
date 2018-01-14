@@ -1,0 +1,243 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="EDIS.Shared.Pages.Certificates.CertificatesPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:Messier16.Forms.Controls;assembly=Messier16.Forms.Controls">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="ItemLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="Gray" />
+                <Setter Property="FontSize" Value="10" />
+            </Style>
+            <Style x:Key="ItemValue" TargetType="Label">
+                <Setter Property="TextColor" Value="Black" />
+                <Setter Property="FontSize" Value="10" />
+                <Setter Property="FontAttributes" Value="Bold" />
+            </Style>
+            <Style x:Key="ItemStack" TargetType="StackLayout">
+                <Setter Property="Orientation" Value="Horizontal" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Command="{Binding Refresh}" Icon="cloudSmall.png" />
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+
+            <StackLayout
+                AbsoluteLayout.LayoutBounds="0,0,1,1"
+                AbsoluteLayout.LayoutFlags="All"
+                Spacing="0">
+
+                <Grid BackgroundColor="White" HeightRequest="45">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="5*" />
+                        <ColumnDefinition Width="1" />
+                        <ColumnDefinition Width="5*" />
+                    </Grid.ColumnDefinitions>
+                    <Label
+                        Grid.Column="0"
+                        FontAttributes="Bold"
+                        HorizontalOptions="Center"
+                        Text="{Binding EstateName}"
+                        VerticalOptions="Center" />
+                    <BoxView
+                        Grid.Column="1"
+                        BackgroundColor="Gray"
+                        HeightRequest="40"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        WidthRequest="1" />
+                    <Label
+                        Grid.Column="2"
+                        FontAttributes="Bold"
+                        HorizontalOptions="Center"
+                        Text="{Binding BuildingName}"
+                        VerticalOptions="Center" />
+                </Grid>
+                <BoxView
+                    BackgroundColor="Gray"
+                    HeightRequest="1"
+                    WidthRequest="1000" />
+
+                <Label
+                    FontAttributes="Bold"
+                    HorizontalOptions="CenterAndExpand"
+                    IsVisible="{Binding NoCertificates}"
+                    Text="No Certificates."
+                    VerticalOptions="CenterAndExpand" />
+
+                <ListView
+                    x:Name="CertificatesList"
+                    BackgroundColor="Transparent"
+                    HasUnevenRows="True"
+                    ItemsSource="{Binding Certificates}"
+                    RowHeight="160"
+                    SelectedItem="{Binding SelectedCertificate}"
+                    SeparatorVisibility="None"
+                    VerticalOptions="FillAndExpand">
+
+                    <x:Arguments>
+                        <ListViewCachingStrategy>RecycleElement</ListViewCachingStrategy>
+                    </x:Arguments>
+
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell x:Name="_listItem">
+                                <Frame
+                                    Margin="5"
+                                    Padding="0"
+                                    BackgroundColor="White"
+                                    HasShadow="False">
+                                    <Grid Padding="5">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="8*" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <Grid.GestureRecognizers>
+                                            <TapGestureRecognizer
+                                                BindingContext="{Binding Source={x:Reference CertificatesList}, Path=BindingContext}"
+                                                Command="{Binding CertificatedSelectedCommand}"
+                                                CommandParameter="{Binding Source={x:Reference _listItem}, Path=BindingContext}" />
+                                        </Grid.GestureRecognizers>
+
+                                        <Grid Grid.Column="0" Padding="5">
+                                            <Image Source="cloud_sync.png" />
+                                        </Grid>
+
+
+                                        <StackLayout Grid.Column="1" Spacing="10">
+                                            <StackLayout Style="{StaticResource ItemStack}">
+                                                <Label Style="{StaticResource ItemLabel}" Text="Certificate No:" />
+                                                <Label Style="{StaticResource ItemValue}" Text="{Binding CertNumber}" />
+                                                <Grid
+                                                    Padding="10,2,10,2"
+                                                    BackgroundColor="Gray"
+                                                    HorizontalOptions="EndAndExpand"
+                                                    VerticalOptions="Center">
+                                                    <Label
+                                                        FontSize="10"
+                                                        Text="{Binding CertStatus}"
+                                                        TextColor="White" />
+                                                </Grid>
+
+                                            </StackLayout>
+
+                                            <StackLayout Style="{StaticResource ItemStack}">
+                                                <Label Style="{StaticResource ItemLabel}" Text="Created on:" />
+                                                <Label Style="{StaticResource ItemValue}" Text="{Binding CertDateCreated, StringFormat='{0:dd-MM-yyyy}'}" />
+                                            </StackLayout>
+
+                                            <StackLayout Style="{StaticResource ItemStack}">
+                                                <Label Style="{StaticResource ItemLabel}" Text="Job Ref:" />
+                                                <Label Style="{StaticResource ItemValue}" Text="{Binding CertInspectionJobReference}" />
+                                            </StackLayout>
+
+                                            <StackLayout Style="{StaticResource ItemStack}">
+                                                <Label Style="{StaticResource ItemLabel}" Text="Description:" />
+                                                <Label Style="{StaticResource ItemValue}" Text="{Binding CertDescription}" />
+                                            </StackLayout>
+
+                                            <StackLayout Style="{StaticResource ItemStack}">
+                                                <Label Style="{StaticResource ItemLabel}" Text="Electrician:" />
+                                                <Label Style="{StaticResource ItemValue}" Text="{Binding Contractor}" />
+                                            </StackLayout>
+
+                                        </StackLayout>
+
+                                        <!--<BoxView Grid.Column="1"  WidthRequest="1000" HeightRequest="1" BackgroundColor="#dfdfdf" VerticalOptions="EndAndExpand"/>-->
+                                    </Grid>
+                                </Frame>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+
+                </ListView>
+
+            </StackLayout>
+
+            <ContentView
+                Padding="10,0"
+                AbsoluteLayout.LayoutBounds="0,0,1,1"
+                AbsoluteLayout.LayoutFlags="All"
+                BackgroundColor="#c0808080"
+                IsVisible="{Binding ShowDeleteDialog}">
+
+                <Grid
+                    Padding="10,10,10,10"
+                    BackgroundColor="White"
+                    HeightRequest="300"
+                    HorizontalOptions="CenterAndExpand"
+                    VerticalOptions="CenterAndExpand"
+                    WidthRequest="300">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="3*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <StackLayout
+                        Grid.Row="0"
+                        HorizontalOptions="FillAndExpand"
+                        Orientation="Horizontal">
+                        <Label
+                            FontSize="25"
+                            HorizontalOptions="StartAndExpand"
+                            Text="Delete" />
+                        <Grid HorizontalOptions="End" VerticalOptions="FillAndExpand">
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding CloseDeleteDialog}" />
+                            </Grid.GestureRecognizers>
+                            <Image HeightRequest="30" Source="close.png" />
+                        </Grid>
+                    </StackLayout>
+
+                    <StackLayout Grid.Row="1">
+                        <Label Text=" Please confirm that you want to delete " />
+                        <Label FontAttributes="Bold" Text="{Binding CertificateSelected.CertNumber}" />
+                        <Label
+                            FontAttributes="Bold"
+                            LineBreakMode="TailTruncation"
+                            Text="{Binding CertificateSelected.CertDescription}" />
+                        <Label Text="from this device?" />
+                    </StackLayout>
+
+                    <StackLayout
+                        Grid.Row="2"
+                        Padding="0"
+                        VerticalOptions="FillAndExpand">
+                        <Grid Padding="0" VerticalOptions="FillAndExpand">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="6*" />
+                            </Grid.ColumnDefinitions>
+                            <controls:Checkbox
+                                Grid.Column="0"
+                                Margin="0"
+                                Checked="{Binding DeleteFromCloud}"
+                                VerticalOptions="FillAndExpand" />
+                            <Label
+                                Grid.Column="1"
+                                Text="Delete on EDIS Cloud"
+                                VerticalOptions="Center" />
+                        </Grid>
+                    </StackLayout>
+
+                    <Button
+                        Grid.Row="3"
+                        Command="{Binding DeleteCertificateCommand}"
+                        Text="Delete" />
+
+                </Grid>
+            </ContentView>
+
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

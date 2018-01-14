@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:Messier16.Forms.Controls;assembly=Messier16.Forms.Controls"
+             x:Class="EDIS.Shared.Pages.Certificates.AllCertificatesPage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="ItemLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="FontSize" Value="10"/>
+                <Setter Property="LineBreakMode" Value="NoWrap"/>
+                <Setter Property="HorizontalTextAlignment" Value="Start"/>
+            </Style>
+            <Style x:Key="ItemValue" TargetType="Label">
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="FontSize" Value="10"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+            </Style>
+            <Style x:Key="ItemStack" TargetType="StackLayout">
+                <Setter Property="Orientation" Value="Horizontal"/>
+            </Style>
+            <Style TargetType="controls:Checkbox">
+                <Setter Property="CheckboxBackgroundColor" Value="Orange"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <ListView x:Name="CertificatesList"
+                      ItemsSource="{Binding Certificates}"
+                      VerticalOptions="FillAndExpand"
+                      RowHeight="150"
+                      SeparatorVisibility="None"
+                      BackgroundColor="Transparent"
+                      HasUnevenRows="True">
+
+                <x:Arguments>
+                    <ListViewCachingStrategy>RecycleElement</ListViewCachingStrategy>
+                </x:Arguments>
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell x:Name="_listItem">
+                            <Grid Padding="5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="8*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer BindingContext="{Binding Source={x:Reference CertificatesList}, Path=BindingContext}"
+                                                          Command="{Binding CertificateSelectedCommand}"
+                                                          CommandParameter="{Binding Source={x:Reference _listItem}, Path=BindingContext}"/>
+                                </Grid.GestureRecognizers>
+
+                                <controls:Checkbox Checked="{Binding IsSelected}"
+                                                   Grid.Column="0"/>
+
+                                <StackLayout Grid.Column="1" Spacing="10">
+                                    <StackLayout Style="{StaticResource ItemStack}">
+                                        <Label Style="{StaticResource ItemLabel}" 
+                                               Text="Certificate No:"/>
+                                        <Label Style="{StaticResource ItemValue}" 
+                                               Text="{Binding Certificate.CertNumber}"/>
+                                        <Grid BackgroundColor="Gray" HorizontalOptions="EndAndExpand" VerticalOptions="Center" Padding="10,2,10,2">
+                                            <Label Text="{Binding Certificate.CertStatus}" FontSize="10"  
+                                                   TextColor="White"/>
+                                        </Grid>
+
+                                    </StackLayout>
+
+                                    <StackLayout Style="{StaticResource ItemStack}">
+                                        <Label Style="{StaticResource ItemLabel}" 
+                                               Text="Created on:"/>
+                                        <Label Style="{StaticResource ItemValue}" 
+                                               Text="{Binding Certificate.CertDateCreated, StringFormat='{0:dd-MM-yyyy}'}"/>
+                                    </StackLayout>
+
+                                    <StackLayout Style="{StaticResource ItemStack}">
+                                        <Label Style="{StaticResource ItemLabel}" 
+                                               Text="Job Ref:"/>
+                                        <Label Style="{StaticResource ItemValue}" 
+                                               Text="{Binding Certificate.CertInspectionJobReference}"/>
+                                    </StackLayout>
+
+                                    <StackLayout Style="{StaticResource ItemStack}">
+                                        <Label Style="{StaticResource ItemLabel}" 
+                                               Text="Description:"/>
+                                        <Label Style="{StaticResource ItemValue}" 
+                                               Text="{Binding Certificate.CertDescription}"/>
+                                    </StackLayout>
+
+                                    <StackLayout Style="{StaticResource ItemStack}">
+                                        <Label Style="{StaticResource ItemLabel}" 
+                                               Text="Electrician:"/>
+                                        <Label Style="{StaticResource ItemValue}" 
+                                               Text="{Binding Certificate.Contractor}"/>
+                                    </StackLayout>
+
+                                </StackLayout>
+
+                                <BoxView Grid.Column="0" Grid.ColumnSpan="2" WidthRequest="1000" HeightRequest="1" BackgroundColor="#dfdfdf" VerticalOptions="EndAndExpand"/>
+
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+            </ListView>
+            
+            <Button Style="{StaticResource AppButton}" Text="Import Certificates" Command="{Binding ImportCertificatesCommand}" VerticalOptions="End"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

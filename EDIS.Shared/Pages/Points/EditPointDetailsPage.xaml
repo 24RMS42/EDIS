@@ -1,0 +1,366 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:EDIS.Shared.Controls;assembly=EDIS.Shared"
+             xmlns:controls1="clr-namespace:Messier16.Forms.Controls;assembly=Messier16.Forms.Controls"
+             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:models="clr-namespace:EDIS.Shared.Models;assembly=EDIS.Shared"
+             x:Class="EDIS.Shared.Pages.Points.EditPointDetailsPage"
+             Title="Point Details">
+
+    <ContentPage.ToolbarItems>
+        <controls:BindableToolbarItem Text="Save" Command="{Binding SavePointCommand}" IsVisible="{Binding AnyPoint}"/>
+        <controls:BindableToolbarItem Text="Delete" Command="{Binding DeletePointCommand}" IsVisible="{Binding AnyPoint}"/>
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+
+                    <StackLayout>
+                        <controls:HorizontalListView Orientation="Horizontal"
+                                                  ItemsSource="{Binding EndPoints, Mode=TwoWay}"
+                                                  HeightRequest="50"
+                                                  x:Name="EndPointsList"
+                                                  AddNewItemCommand="{Binding AddNewCommand}"
+                                                  RegularItemCommand="{Binding EndPointSelectedCommand}"
+                                                     ItemColor="Orange"
+                                                     SelectedItemColor="Silver">
+                            <controls:HorizontalListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell >
+
+                                        <Grid x:Name="listItem">
+
+                                            <Label Text="{Binding CircuitEndPoint}"
+                                               HorizontalTextAlignment="Center"
+                                               VerticalTextAlignment="Center" />
+
+                                        </Grid>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </controls:HorizontalListView.ItemTemplate>
+                        </controls:HorizontalListView>
+
+                        <Label Text="Selected circuit doesn't have any end point."
+                           VerticalOptions="CenterAndExpand"
+                           HorizontalOptions="CenterAndExpand"
+                           IsVisible="{Binding AnyPoint, Converter={StaticResource NegativeBooleanConverter}}"/>
+
+                        <StackLayout IsVisible="{Binding AnyPoint}">
+
+                            <StackLayout Spacing="0">
+                                <!--element-->
+                                <StackLayout Style="{StaticResource AccordionHeader}">
+                                    <!--label-->
+                                    <Label Text="Basic Information" Style="{StaticResource AccordionHeaderLabel}"/>
+                                    <forms:CachedImage x:Name="arrow1" Source="arrowDown.png" Style="{StaticResource AccordionHeaderArrow}"/>
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                            Tapped="TapGestureRecognizerx1_OnTapped">
+                                        </TapGestureRecognizer>
+                                    </StackLayout.GestureRecognizers>
+                                </StackLayout>
+
+                                <StackLayout x:Name="BasicInfo" HeightRequest="0" Scale="0" BackgroundColor="White">
+                                    <Grid Style="{StaticResource ItemGrid}">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="2*"/>
+                                            <RowDefinition Height="1"/>
+                                        </Grid.RowDefinitions>
+
+                                        <Label Grid.Row="0" Text="Point" Style="{StaticResource UpperLabel}"/>
+                                        <Entry Grid.Row="1" Text="{Binding SelectedEndPoint.CircuitEndPoint}" Style="{StaticResource LowerEntry}"/>
+                                    </Grid>
+
+                                    <Grid Style="{StaticResource ItemGrid}">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="2*"/>
+                                            <RowDefinition Height="1"/>
+                                        </Grid.RowDefinitions>
+
+                                        <Label Grid.Row="0" Text="Position" Style="{StaticResource UpperLabel}"/>
+                                        <Entry Grid.Row="1" Text="{Binding SelectedEndPoint.CircuitPointPosition}" Style="{StaticResource LowerEntry}"/>
+                                    </Grid>
+                                </StackLayout>
+
+                            </StackLayout>
+
+                            <StackLayout Spacing="0">
+                                <!--element-->
+                                <StackLayout Style="{StaticResource AccordionHeader}">
+                                    <!--label-->
+                                    <Label Text="RCD Details" Style="{StaticResource AccordionHeaderLabel}"/>
+                                    <forms:CachedImage x:Name="arrow2" Source="arrowDown.png" Style="{StaticResource AccordionHeaderArrow}"/>
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                            Tapped="TapGestureRecognizerx2_OnTapped">
+                                        </TapGestureRecognizer>
+                                    </StackLayout.GestureRecognizers>
+                                </StackLayout>
+
+                                <StackLayout x:Name="RcdDetails" HeightRequest="0" Scale="0" BackgroundColor="White">
+
+                                    <Grid Style="{StaticResource ItemGrid}">
+                                    <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="2*"/>
+                                            <RowDefinition Height="1"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="5*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+
+
+                                    <Label Grid.Row="0" Text="TYPE BSEN Number" Style="{StaticResource UpperLabel}"/>
+                                    <Entry Grid.Row="1" Grid.Column="0" Text="{Binding RcdType}" Style="{StaticResource LowerEntry}"/>
+                                        <Grid Grid.Row="1" Grid.Column="1">
+                                            <forms:CachedImage Source="dots.png" HeightRequest="30" VerticalOptions="Start"/>
+                                            <Picker x:Name="RcdTypePicker" IsVisible="False" ItemsSource="{Binding RcdTypes}" Style="{StaticResource LowerPicker}" ItemDisplayBinding="{Binding RcdType}" SelectedItem="{Binding SelectedRcdType}"/>
+                                            <Grid.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="TapGestureRecognizer1_OnTapped"/>
+                                            </Grid.GestureRecognizers>
+                                        </Grid>
+                                </Grid>
+
+                                    <Grid Style="{StaticResource ItemGrid}">
+                                    <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="2*"/>
+                                            <RowDefinition Height="1"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="5*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+
+
+                                    <Label Grid.Row="0" Text="RCD rating IΔn (mA)" Style="{StaticResource UpperLabel}"/>
+                                    <Entry Grid.Row="1" Keyboard="Numeric" Grid.Column="0" Text="{Binding RcdOpCurrent}" Style="{StaticResource LowerEntry}"/>
+                                        <Grid Grid.Row="1" Grid.Column="1">
+                                            <forms:CachedImage Source="dots.png" HeightRequest="30" VerticalOptions="Start"/>
+                                            <Picker x:Name="RcdOpCurrentPicker" IsVisible="False" ItemsSource="{Binding RcdOpCurrents}" Style="{StaticResource LowerPicker}" ItemDisplayBinding="{Binding RcdOpCurrent}" SelectedItem="{Binding SelectedRcdOpCurrent}"/>
+                                            <Grid.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="TapGestureRecognizer2_OnTapped"/>
+                                            </Grid.GestureRecognizers>
+                                        </Grid>
+                                </Grid>
+
+                                    <Grid Style="{StaticResource ItemGrid}">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="2*"/>
+                                            <RowDefinition Height="1"/>
+                                        </Grid.RowDefinitions>
+
+                                        <Label Grid.Row="0" Text="RATED ms at IΔn" Style="{StaticResource UpperLabel}"/>
+                                        <Entry Grid.Row="1" Keyboard="Numeric" Text="{Binding SelectedEndPoint.CircuitRcdOpTimeIRated}" Style="{StaticResource LowerEntry}"/>
+                                    </Grid>
+
+                                    <Grid Style="{StaticResource ItemGrid}">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="2*"/>
+                                            <RowDefinition Height="1"/>
+                                        </Grid.RowDefinitions>
+
+                                        <Label Grid.Row="0" Text="RATED ms at 5IΔn" Style="{StaticResource UpperLabel}"/>
+                                    <Entry Grid.Row="1" Keyboard="Numeric" Text="{Binding SelectedEndPoint.CircuitRcdOpTime_5IRated}" Style="{StaticResource LowerEntry}"/>
+                                    </Grid>
+
+                                    <Grid Style="{StaticResource ItemGrid}">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="2*"/>
+                                            <RowDefinition Height="1"/>
+                                        </Grid.RowDefinitions>
+
+                                        <Label Grid.Row="0" Text="TESTED ms at IΔn" Style="{StaticResource UpperLabel}"/>
+                                    <Entry Grid.Row="1" Keyboard="Numeric" Text="{Binding SelectedEndPoint.CircuitRcdOpTimeITested}" Style="{StaticResource LowerEntry}"/>
+                                    </Grid>
+
+                                    <Grid Style="{StaticResource ItemGrid}">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="2*"/>
+                                            <RowDefinition Height="1"/>
+                                        </Grid.RowDefinitions>
+
+                                        <Label Grid.Row="0" Text="TESTED ms at 5IΔn" Style="{StaticResource UpperLabel}"/>
+                                    <Entry Grid.Row="1" Keyboard="Numeric" Text="{Binding SelectedEndPoint.CircuitRcdOpTime_5ITested}" Style="{StaticResource LowerEntry}"/>
+                                    </Grid>
+
+                                    <Grid Style="{StaticResource ItemGrid}">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="2*"/>
+                                        <RowDefinition Height="1"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Label Grid.Column="0" Text="RCD test button operation satisfactory" Style="{StaticResource CheckboxLabel}"/>
+                                        <!--<controls1:Checkbox Grid.Column="1" Checked="{Binding SelectedEndPoint.CircuitRcdTestButton, Converter={StaticResource BoolIntConverter}}" Style="{StaticResource Checkbox}"/>-->
+                                    <Picker Grid.Row="1" Style="{StaticResource LowerPicker}" ItemDisplayBinding="{Binding Text}" SelectedIndex="{Binding SelectedCircuitRcdTestButton}">
+                                        <Picker.ItemsSource>
+                                            <x:Array Type="{x:Type models:PolarityValue}">
+                                                <models:PolarityValue>
+                                                    <models:PolarityValue.Text>
+                                                        <x:String></x:String>
+                                                    </models:PolarityValue.Text>
+                                                    <models:PolarityValue.Value>0</models:PolarityValue.Value>
+                                                </models:PolarityValue>
+
+                                                <models:PolarityValue>
+                                                    <models:PolarityValue.Text>&#10004;</models:PolarityValue.Text>
+                                                    <models:PolarityValue.Value>1</models:PolarityValue.Value>
+                                                </models:PolarityValue>
+
+                                                <models:PolarityValue>
+                                                    <models:PolarityValue.Text>&#10008;</models:PolarityValue.Text>
+                                                    <models:PolarityValue.Value>2</models:PolarityValue.Value>
+                                                </models:PolarityValue>
+
+                                                <models:PolarityValue>
+                                                    <models:PolarityValue.Text>LIM</models:PolarityValue.Text>
+                                                    <models:PolarityValue.Value>3</models:PolarityValue.Value>
+                                                </models:PolarityValue>
+
+                                                <models:PolarityValue>
+                                                    <models:PolarityValue.Text>N/A</models:PolarityValue.Text>
+                                                    <models:PolarityValue.Value>4</models:PolarityValue.Value>
+                                                </models:PolarityValue>
+
+                                                <models:PolarityValue>
+                                                    <models:PolarityValue.Text>N/V</models:PolarityValue.Text>
+                                                    <models:PolarityValue.Value>4</models:PolarityValue.Value>
+                                                </models:PolarityValue>
+
+                                            </x:Array>
+                                        </Picker.ItemsSource>
+                                    </Picker>
+                                </Grid>
+
+                                </StackLayout>
+
+                            </StackLayout>
+
+                            <StackLayout Spacing="0">
+                                <!--element-->
+                                <StackLayout Style="{StaticResource AccordionHeader}">
+                                    <!--label-->
+                                    <Label Text="Zs, Polarity and Observations" Style="{StaticResource AccordionHeaderLabel}"/>
+                                    <forms:CachedImage x:Name="arrow3" Source="arrowDown.png" Style="{StaticResource AccordionHeaderArrow}"/>
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                            Tapped="TapGestureRecognizerx3_OnTapped">
+                                        </TapGestureRecognizer>
+                                    </StackLayout.GestureRecognizers>
+                                </StackLayout>
+
+                                <StackLayout x:Name="ZPO"  HeightRequest="0" Scale="0" BackgroundColor="White">
+
+                                    <Grid Style="{StaticResource ItemGrid}">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="2*"/>
+                                        <RowDefinition Height="1"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Label Grid.Row="0" Text="Polarity correct" Style="{StaticResource CheckboxLabel}"/>
+                                        <!--<controls1:Checkbox Grid.Column="1" Checked="{Binding SelectedEndPoint.CircuitPointPolarity, Converter={StaticResource BoolIntConverter}}" Style="{StaticResource Checkbox}"/>-->
+                                    <Picker Grid.Row="1" Style="{StaticResource LowerPicker}" ItemDisplayBinding="{Binding Text}" SelectedIndex="{Binding SelectedCircuitPolarity}">
+                                        <Picker.ItemsSource>
+                                            <x:Array Type="{x:Type models:PolarityValue}">
+                                                <models:PolarityValue>
+                                                    <models:PolarityValue.Text>
+                                                        <x:String></x:String>
+                                                    </models:PolarityValue.Text>
+                                                    <models:PolarityValue.Value>0</models:PolarityValue.Value>
+                                                </models:PolarityValue>
+
+                                                <models:PolarityValue>
+                                                    <models:PolarityValue.Text>&#10004;</models:PolarityValue.Text>
+                                                    <models:PolarityValue.Value>1</models:PolarityValue.Value>
+                                                </models:PolarityValue>
+
+                                                <models:PolarityValue>
+                                                    <models:PolarityValue.Text>&#10008;</models:PolarityValue.Text>
+                                                    <models:PolarityValue.Value>2</models:PolarityValue.Value>
+                                                </models:PolarityValue>
+
+                                                <models:PolarityValue>
+                                                    <models:PolarityValue.Text>LIM</models:PolarityValue.Text>
+                                                    <models:PolarityValue.Value>3</models:PolarityValue.Value>
+                                                </models:PolarityValue>
+
+                                                <models:PolarityValue>
+                                                    <models:PolarityValue.Text>N/A</models:PolarityValue.Text>
+                                                    <models:PolarityValue.Value>4</models:PolarityValue.Value>
+                                                </models:PolarityValue>
+
+                                                <models:PolarityValue>
+                                                    <models:PolarityValue.Text>N/V</models:PolarityValue.Text>
+                                                    <models:PolarityValue.Value>4</models:PolarityValue.Value>
+                                                </models:PolarityValue>
+
+                                            </x:Array>
+                                        </Picker.ItemsSource>
+                                    </Picker>
+                                    </Grid>
+
+                                    <Grid Style="{StaticResource ItemGrid}">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="2*"/>
+                                            <RowDefinition Height="1"/>
+                                        </Grid.RowDefinitions>
+
+                                        <Label Grid.Row="0" Text="Zs" Style="{StaticResource UpperLabel}"/>
+                                        <Entry Grid.Row="1" Text="{Binding SelectedEndPoint.CircuitPointMeasuredZs}" Style="{StaticResource LowerEntry}"/>
+                                    </Grid>
+
+                                    <Grid Style="{StaticResource ItemGrid}">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="2*"/>
+                                            <RowDefinition Height="1"/>
+                                        </Grid.RowDefinitions>
+
+                                        <Label Grid.Row="0" Text="Obs from LookUp" Style="{StaticResource UpperLabel}"/>
+                                        <Picker Grid.Row="1" ItemsSource="{Binding ObservationsFrom}" ItemDisplayBinding="{Binding ObsFromTitle}" SelectedItem="{Binding SelectedObservation}" Style="{StaticResource LowerPicker}"/>
+                                    </Grid>
+
+                                    <Grid Style="{StaticResource ItemGrid}">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="2*"/>
+                                            <RowDefinition Height="1"/>
+                                        </Grid.RowDefinitions>
+
+                                        <Label Grid.Row="0" Text="Observation" Style="{StaticResource UpperLabel}"/>
+                                        <Entry Grid.Row="1" Text="{Binding SelectedEndPoint.DbcctObservation}" Style="{StaticResource LowerEntry}"/>
+                                    </Grid>
+
+                                    <Grid Style="{StaticResource ItemGrid}">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="2*"/>
+                                            <RowDefinition Height="1"/>
+                                        </Grid.RowDefinitions>
+
+                                        <Label Grid.Row="0" Text="Code" Style="{StaticResource UpperLabel}"/>
+                                        <Picker Grid.Row="1" ItemsSource="{Binding ClasifficationCodes}" ItemDisplayBinding="{Binding Text}"  SelectedItem="{Binding SelectedClassificationCode}" Style="{StaticResource LowerPicker}"/>
+                                    </Grid>
+                                </StackLayout>
+
+                            </StackLayout>
+                        </StackLayout>
+
+                    </StackLayout>
+
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

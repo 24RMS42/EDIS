@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             x:Class="EDIS.Shared.Pages.Profile.ElectricianInfoPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="AccordionHeader" TargetType="StackLayout">
+                <Setter Property="BackgroundColor" Value="#edeeef"/>
+                <Setter Property="Padding" Value="15"/>
+                <Setter Property="Orientation" Value="Horizontal"/>
+            </Style>
+            <Style x:Key="AccordionHeaderLabel" TargetType="Label">
+                <Setter Property="VerticalTextAlignment" Value="Center"/>
+                <Setter Property="HorizontalOptions" Value="StartAndExpand"/>
+            </Style>
+            <Style x:Key="AccordionHeaderArrow" TargetType="forms:CachedImage">
+                <Setter Property="HorizontalOptions" Value="End"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Save" Command="{Binding SaveUserElectricianInfoCommand}"></ToolbarItem>
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+
+        <ScrollView >
+            <StackLayout Padding="10">
+                <!--page-->
+
+                <StackLayout Spacing="0">
+                    <!--element-->
+                    <StackLayout Style="{StaticResource AccordionHeader}">
+                        <!--label-->
+                        <Label Text="Accredition" Style="{StaticResource AccordionHeaderLabel}"/>
+                        <forms:CachedImage x:Name="arrow1" Source="arrowDown.png" Style="{StaticResource AccordionHeaderArrow}"/>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Tapped="TapGestureRecognizerx1_OnTapped">
+                            </TapGestureRecognizer>
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+                    <StackLayout x:Name="AccreditionBlock" HeightRequest="0" Scale="0" BackgroundColor="White">
+                        <!--area-->
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Text="Accredited certification body" Style="{StaticResource UpperLabel}"/>
+                            <Entry Grid.Row="1" Text="{Binding User.ContractorAccreditedCertificationBody}" Style="{StaticResource LowerEntry}"  />
+                        </Grid>
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Text="The contractors accreditation reference" Style="{StaticResource UpperLabel}"/>
+                            <Entry Grid.Row="1" Text="{Binding User.ContractorAccreditationNumber}" Style="{StaticResource LowerEntry}"  />
+                        </Grid>
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Text="Branch number (if applicable)" Style="{StaticResource UpperLabel}"/>
+                            <Entry Grid.Row="1" Text="{Binding User.UserBranchNumber}" Style="{StaticResource LowerEntry}"  />
+                        </Grid>
+                        
+                    </StackLayout>
+                </StackLayout>
+
+
+                <StackLayout Spacing="0">
+                    <!--element-->
+                    <StackLayout Style="{StaticResource AccordionHeader}">
+                        <!--label-->
+                        <Label Text="Test Instrument Serial Numbers" Style="{StaticResource AccordionHeaderLabel}"/>
+                        <forms:CachedImage x:Name="arrow2" Source="arrowDown.png" Style="{StaticResource AccordionHeaderArrow}"/>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Tapped="TapGestureRecognizerx2_OnTapped">
+                            </TapGestureRecognizer>
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+                    <StackLayout x:Name="TestInstrumentSerialNumbersBlock" HeightRequest="0" Scale="0" BackgroundColor="White">
+                        <!--area-->
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Text="Earth fault loop impedance" Style="{StaticResource UpperLabel}"/>
+                            <Entry Grid.Row="1" Text="{Binding Instrument.InstrumentEfliSn}" Style="{StaticResource LowerEntry}"  />
+                        </Grid>
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Text="Insulation resistance" Style="{StaticResource UpperLabel}"/>
+                            <Entry Grid.Row="1" Text="{Binding Instrument.InstrumentIrSn}" Style="{StaticResource LowerEntry}"   />
+                        </Grid>
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Text="Continuity" Style="{StaticResource UpperLabel}"/>
+                            <Entry Grid.Row="1" Text="{Binding Instrument.InstrumentCSn}" Style="{StaticResource LowerEntry}"  />
+                        </Grid>
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Text="RCD" Style="{StaticResource UpperLabel}"/>
+                            <Entry Grid.Row="1" Text="{Binding Instrument.InstrumentRcdSn}" Style="{StaticResource LowerEntry}"  />
+                        </Grid>
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Text="Other serial number-1" Style="{StaticResource UpperLabel}"/>
+                            <Entry Grid.Row="1" Text="{Binding Instrument.InstrumentOSn1}" Style="{StaticResource LowerEntry}"  />
+                        </Grid>
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Text="Other serial number-2" Style="{StaticResource UpperLabel}"/>
+                            <Entry Grid.Row="1" Text="{Binding Instrument.InstrumentOSn2}" Style="{StaticResource LowerEntry}"  />
+                        </Grid>
+
+                    </StackLayout>
+                </StackLayout>
+
+
+            </StackLayout>
+        </ScrollView>
+
+    </ContentPage.Content>
+</ContentPage>

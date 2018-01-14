@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:circuits="clr-namespace:EDIS.Shared.Pages.Boards.Circuits;assembly=EDIS.Shared"
+             x:Class="EDIS.Shared.Pages.Boards.Circuits.MainCircuitDataPage"
+            Title="Circuit Details">
+  <!--Pages can be added as references or inline-->
+    <circuits:CircuitTestDetailsPage Title="Circuit Test" BindingContext="{Binding CircuitTestViewModel}"/>
+    <circuits:CircuitDetailsPage Title="Circuit" BindingContext="{Binding CircuitViewModel}"/>
+</TabbedPage>

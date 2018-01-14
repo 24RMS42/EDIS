@@ -1,0 +1,534 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="EDIS.Shared.Pages.Boards.Circuits.CircuitTestDetailsPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:Messier16.Forms.Controls;assembly=Messier16.Forms.Controls"
+    xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:models="clr-namespace:EDIS.Shared.Models;assembly=EDIS.Shared">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Command="{Binding Save}" Text="Save" />
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <ScrollView Padding="10">
+            <StackLayout>
+
+                <StackLayout Spacing="0">
+                    <!--  element  -->
+                    <StackLayout Style="{StaticResource AccordionHeader}">
+                        <!--  label  -->
+                        <Label Style="{StaticResource AccordionHeaderLabel}" Text="Circuit Impedance, Ring final Continuity (Ω)" />
+                        <forms:CachedImage
+                            x:Name="arrow1"
+                            Source="arrowDown.png"
+                            Style="{StaticResource AccordionHeaderArrow}" />
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizerx1_OnTapped" />
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+                    <StackLayout
+                        x:Name="CircuitImpedanceRing"
+                        BackgroundColor="White"
+                        HeightRequest="0"
+                        Scale="0">
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="2*" />
+                                <RowDefinition Height="1" />
+                            </Grid.RowDefinitions>
+
+                            <Label
+                                Grid.Row="0"
+                                Style="{StaticResource UpperLabel}"
+                                Text="r1" />
+                            <Entry
+                                Grid.Row="1"
+                                Keyboard="Numeric"
+                                Style="{StaticResource LowerEntry}"
+                                Text="{Binding Circuit.CircuitImpedanceRingFinalR1Phases}" />
+                        </Grid>
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="2*" />
+                                <RowDefinition Height="1" />
+                            </Grid.RowDefinitions>
+
+                            <Label
+                                Grid.Row="0"
+                                Style="{StaticResource UpperLabel}"
+                                Text="r n" />
+                            <Entry
+                                Grid.Row="1"
+                                Keyboard="Numeric"
+                                Style="{StaticResource LowerEntry}"
+                                Text="{Binding Circuit.CircuitImpedanceRingFinalRnNeutral}" />
+                        </Grid>
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="2*" />
+                                <RowDefinition Height="1" />
+                            </Grid.RowDefinitions>
+
+                            <Label
+                                Grid.Row="0"
+                                Style="{StaticResource UpperLabel}"
+                                Text="r2" />
+                            <Entry
+                                Grid.Row="1"
+                                Keyboard="Numeric"
+                                Style="{StaticResource LowerEntry}"
+                                Text="{Binding Circuit.CircuitImpedanceRingFinalR2Cpc}" />
+                        </Grid>
+                    </StackLayout>
+                </StackLayout>
+
+                <StackLayout Spacing="0">
+                    <!--  element  -->
+                    <StackLayout Style="{StaticResource AccordionHeader}">
+                        <!--  label  -->
+                        <Label Style="{StaticResource AccordionHeaderLabel}" Text="Circuit Impedance, Continuity (Ω)" />
+                        <forms:CachedImage
+                            x:Name="arrow2"
+                            Source="arrowDown.png"
+                            Style="{StaticResource AccordionHeaderArrow}" />
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizerx2_OnTapped" />
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+                    <StackLayout
+                        x:Name="CircuitImpedanceAll"
+                        BackgroundColor="White"
+                        HeightRequest="0"
+                        Scale="0">
+                        <Label
+                            FontSize="15"
+                            HorizontalTextAlignment="Center"
+                            Text="Only one field to be completed"
+                            VerticalTextAlignment="Center" />
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="2*" />
+                                <RowDefinition Height="1" />
+                            </Grid.RowDefinitions>
+
+                            <Label
+                                Grid.Row="0"
+                                Style="{StaticResource UpperLabel}"
+                                Text="R1+R2" />
+                            <Entry
+                                Grid.Row="1"
+                                IsEnabled="{Binding R2, Converter={StaticResource FillledStringToBoolConverter}}"
+                                Keyboard="Numeric"
+                                Style="{StaticResource LowerEntry}"
+                                Text="{Binding R1R2}" />
+                        </Grid>
+
+                        <Label
+                            FontSize="15"
+                            HorizontalTextAlignment="Center"
+                            Text="Or"
+                            VerticalTextAlignment="Center" />
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="2*" />
+                                <RowDefinition Height="1" />
+                            </Grid.RowDefinitions>
+
+                            <Label
+                                Grid.Row="0"
+                                Style="{StaticResource UpperLabel}"
+                                Text="R2" />
+                            <Entry
+                                Grid.Row="1"
+                                IsEnabled="{Binding R1R2, Converter={StaticResource FillledStringToBoolConverter}}"
+                                Keyboard="Numeric"
+                                Style="{StaticResource LowerEntry}"
+                                Text="{Binding R2}" />
+                        </Grid>
+                    </StackLayout>
+                </StackLayout>
+
+                <StackLayout Spacing="0">
+                    <!--  element  -->
+                    <StackLayout Style="{StaticResource AccordionHeader}">
+                        <!--  label  -->
+                        <Label Style="{StaticResource AccordionHeaderLabel}" Text="Insulation Resistance MΩ" />
+                        <forms:CachedImage
+                            x:Name="arrow3"
+                            Source="arrowDown.png"
+                            Style="{StaticResource AccordionHeaderArrow}" />
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizerx3_OnTapped" />
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+                    <StackLayout
+                        x:Name="InsulationResistance"
+                        BackgroundColor="White"
+                        HeightRequest="0"
+                        Scale="0">
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="2*" />
+                                <RowDefinition Height="1" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="5*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                Grid.ColumnSpan="2"
+                                Style="{StaticResource UpperLabel}"
+                                Text="L-L" />
+                            <Entry
+                                Grid.Row="1"
+                                Grid.Column="0"
+                                Style="{StaticResource LowerEntry}"
+                                Text="{Binding PhasePhase}" />
+                            <Grid Grid.Row="1" Grid.Column="1">
+                                <forms:CachedImage
+                                    HeightRequest="30"
+                                    Source="dots.png"
+                                    VerticalOptions="Start" />
+                                <Picker
+                                    x:Name="ResistancesPicker1"
+                                    IsVisible="False"
+                                    ItemDisplayBinding="{Binding Text}"
+                                    ItemsSource="{Binding ResistancesValues}"
+                                    SelectedItem="{Binding SelectedPhasePhase}" />
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="TapGestureRecognizer1_OnTapped" />
+                                </Grid.GestureRecognizers>
+                            </Grid>
+                        </Grid>
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="2*" />
+                                <RowDefinition Height="1" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="5*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                Grid.ColumnSpan="2"
+                                Style="{StaticResource UpperLabel}"
+                                Text="L-E" />
+                            <Entry
+                                Grid.Row="1"
+                                Grid.Column="0"
+                                Style="{StaticResource LowerEntry}"
+                                Text="{Binding PhaseEarth}" />
+                            <Grid Grid.Row="1" Grid.Column="1">
+                                <forms:CachedImage
+                                    HeightRequest="30"
+                                    Source="dots.png"
+                                    VerticalOptions="Start" />
+                                <Picker
+                                    x:Name="ResistancesPicker2"
+                                    IsVisible="False"
+                                    ItemDisplayBinding="{Binding Text}"
+                                    ItemsSource="{Binding ResistancesValues}"
+                                    SelectedItem="{Binding SelectedPhaseEarth}" />
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="TapGestureRecognizer2_OnTapped" />
+                                </Grid.GestureRecognizers>
+                            </Grid>
+                        </Grid>
+                    </StackLayout>
+                </StackLayout>
+
+                <StackLayout Spacing="0">
+                    <!--  element  -->
+                    <StackLayout Style="{StaticResource AccordionHeader}">
+                        <!--  label  -->
+                        <Label Style="{StaticResource AccordionHeaderLabel}" Text="Polarity and Zs(Ω)" />
+                        <forms:CachedImage
+                            x:Name="arrow4"
+                            Source="arrowDown.png"
+                            Style="{StaticResource AccordionHeaderArrow}" />
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizerx4_OnTapped" />
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+                    <StackLayout
+                        x:Name="PolarityAndZs"
+                        BackgroundColor="White"
+                        HeightRequest="0"
+                        Scale="0">
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="2*" />
+                                <RowDefinition Height="1" />
+                            </Grid.RowDefinitions>
+
+                            <Label
+                                Grid.Row="0"
+                                Style="{StaticResource UpperLabel}"
+                                Text="Polarity correct" />
+                            <Picker
+                                Grid.Row="1"
+                                ItemDisplayBinding="{Binding Text}"
+                                SelectedIndex="{Binding SelectedCircuitPolarity}"
+                                Style="{StaticResource LowerPicker}">
+                                <Picker.ItemsSource>
+                                    <x:Array Type="{x:Type models:PolarityValue}">
+                                        <models:PolarityValue>
+                                            <models:PolarityValue.Text>
+                                                <x:String />
+                                            </models:PolarityValue.Text>
+                                            <models:PolarityValue.Value>0</models:PolarityValue.Value>
+                                        </models:PolarityValue>
+
+                                        <models:PolarityValue>
+                                            <models:PolarityValue.Text>&#10004;</models:PolarityValue.Text>
+                                            <models:PolarityValue.Value>1</models:PolarityValue.Value>
+                                        </models:PolarityValue>
+
+                                        <models:PolarityValue>
+                                            <models:PolarityValue.Text>&#10008;</models:PolarityValue.Text>
+                                            <models:PolarityValue.Value>2</models:PolarityValue.Value>
+                                        </models:PolarityValue>
+
+                                        <models:PolarityValue>
+                                            <models:PolarityValue.Text>LIM</models:PolarityValue.Text>
+                                            <models:PolarityValue.Value>3</models:PolarityValue.Value>
+                                        </models:PolarityValue>
+
+                                        <models:PolarityValue>
+                                            <models:PolarityValue.Text>N/A</models:PolarityValue.Text>
+                                            <models:PolarityValue.Value>4</models:PolarityValue.Value>
+                                        </models:PolarityValue>
+
+                                    </x:Array>
+                                </Picker.ItemsSource>
+                            </Picker>
+                        </Grid>
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="2*" />
+                                <RowDefinition Height="1" />
+                            </Grid.RowDefinitions>
+
+                            <Label
+                                Grid.Row="0"
+                                Style="{StaticResource UpperLabel}"
+                                Text="Max Measured Zs(Ω)" />
+                            <Entry
+                                Grid.Row="1"
+                                Keyboard="Numeric"
+                                Style="{StaticResource LowerEntry}"
+                                Text="{Binding Circuit.CircuitMaxEarthLoop}" />
+
+                        </Grid>
+                    </StackLayout>
+                </StackLayout>
+
+                <StackLayout Spacing="0">
+                    <!--  element  -->
+                    <StackLayout Style="{StaticResource AccordionHeader}">
+                        <!--  label  -->
+                        <Label Style="{StaticResource AccordionHeaderLabel}" Text="RCD Measurements (Single Point)" />
+                        <forms:CachedImage
+                            x:Name="arrow5"
+                            Source="arrowDown.png"
+                            Style="{StaticResource AccordionHeaderArrow}" />
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizerx5_OnTapped" />
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+                    <StackLayout
+                        x:Name="RCDMeasurements"
+                        BackgroundColor="White"
+                        HeightRequest="0"
+                        Scale="0">
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="2*" />
+                                <RowDefinition Height="1" />
+                            </Grid.RowDefinitions>
+
+                            <Label
+                                Grid.Row="0"
+                                Style="{StaticResource UpperLabel}"
+                                Text="Trip time IΔn ms" />
+                            <Entry
+                                Grid.Row="1"
+                                Keyboard="Numeric"
+                                Style="{StaticResource LowerEntry}"
+                                Text="{Binding Circuit.CircuitRcdOpTimeI}" />
+                        </Grid>
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="2*" />
+                                <RowDefinition Height="1" />
+                            </Grid.RowDefinitions>
+
+                            <Label
+                                Grid.Row="0"
+                                Style="{StaticResource UpperLabel}"
+                                Text="Trip time 5IΔn ms" />
+                            <Entry
+                                Grid.Row="1"
+                                Keyboard="Numeric"
+                                Style="{StaticResource LowerEntry}"
+                                Text="{Binding Circuit.CircuitRcdOpTime_5I}" />
+                        </Grid>
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="2*" />
+                                <RowDefinition Height="1" />
+                            </Grid.RowDefinitions>
+
+                            <Label
+                                Grid.Row="0"
+                                Style="{StaticResource UpperLabel}"
+                                Text="RCD Test Button Operation Satisfactory" />
+                            <Picker
+                                Grid.Row="1"
+                                ItemDisplayBinding="{Binding Text}"
+                                SelectedIndex="{Binding SelectedRcdTestButton}"
+                                Style="{StaticResource LowerPicker}">
+                                <Picker.ItemsSource>
+                                    <x:Array Type="{x:Type models:RcdTestButtonValue}">
+                                        <models:RcdTestButtonValue>
+                                            <models:RcdTestButtonValue.Text>
+                                                <x:String />
+                                            </models:RcdTestButtonValue.Text>
+                                            <models:RcdTestButtonValue.Value>0</models:RcdTestButtonValue.Value>
+                                        </models:RcdTestButtonValue>
+
+                                        <models:RcdTestButtonValue>
+                                            <models:RcdTestButtonValue.Text>&#10004;</models:RcdTestButtonValue.Text>
+                                            <models:RcdTestButtonValue.Value>1</models:RcdTestButtonValue.Value>
+                                        </models:RcdTestButtonValue>
+
+                                        <models:RcdTestButtonValue>
+                                            <models:RcdTestButtonValue.Text>&#10008;</models:RcdTestButtonValue.Text>
+                                            <models:RcdTestButtonValue.Value>2</models:RcdTestButtonValue.Value>
+                                        </models:RcdTestButtonValue>
+
+                                        <models:RcdTestButtonValue>
+                                            <models:RcdTestButtonValue.Text>LIM</models:RcdTestButtonValue.Text>
+                                            <models:RcdTestButtonValue.Value>3</models:RcdTestButtonValue.Value>
+                                        </models:RcdTestButtonValue>
+
+                                        <models:RcdTestButtonValue>
+                                            <models:RcdTestButtonValue.Text>N/A</models:RcdTestButtonValue.Text>
+                                            <models:RcdTestButtonValue.Value>4</models:RcdTestButtonValue.Value>
+                                        </models:RcdTestButtonValue>
+
+                                    </x:Array>
+                                </Picker.ItemsSource>
+                            </Picker>
+                        </Grid>
+                    </StackLayout>
+                </StackLayout>
+
+                <StackLayout Spacing="0">
+                    <!--  element  -->
+                    <StackLayout Style="{StaticResource AccordionHeader}">
+                        <!--  label  -->
+                        <Label Style="{StaticResource AccordionHeaderLabel}" Text="Circuit Observations" />
+                        <forms:CachedImage
+                            x:Name="arrow6"
+                            Source="arrowDown.png"
+                            Style="{StaticResource AccordionHeaderArrow}" />
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizerx6_OnTapped" />
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+                    <StackLayout
+                        x:Name="CircuitObservations"
+                        BackgroundColor="White"
+                        HeightRequest="0"
+                        Scale="0">
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="2*" />
+                                <RowDefinition Height="1" />
+                            </Grid.RowDefinitions>
+
+                            <Label
+                                Grid.Row="0"
+                                Style="{StaticResource UpperLabel}"
+                                Text="ObsFromLkUp" />
+                            <Picker
+                                Grid.Row="1"
+                                ItemDisplayBinding="{Binding ObsFromTitle}"
+                                ItemsSource="{Binding ObservationsFrom}"
+                                SelectedItem="{Binding SelectedObservation}"
+                                Style="{StaticResource LowerPicker}" />
+                        </Grid>
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="2*" />
+                                <RowDefinition Height="1" />
+                            </Grid.RowDefinitions>
+
+                            <Label
+                                Grid.Row="0"
+                                Style="{StaticResource UpperLabel}"
+                                Text="Circuit observation" />
+                            <Entry
+                                Grid.Row="1"
+                                Style="{StaticResource LowerEntry}"
+                                Text="{Binding Circuit.DbcctObservation}" />
+                        </Grid>
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="2*" />
+                                <RowDefinition Height="1" />
+                            </Grid.RowDefinitions>
+
+                            <Label
+                                Grid.Row="0"
+                                Style="{StaticResource UpperLabel}"
+                                Text="Classification code" />
+                            <Picker
+                                Grid.Row="1"
+                                ItemDisplayBinding="{Binding Text}"
+                                ItemsSource="{Binding ClasifficationCodes}"
+                                SelectedItem="{Binding SelectedClassificationCode}"
+                                Style="{StaticResource LowerPicker}" />
+                        </Grid>
+
+                    </StackLayout>
+                </StackLayout>
+
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

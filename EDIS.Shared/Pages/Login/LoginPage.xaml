@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls1="clr-namespace:Messier16.Forms.Controls;assembly=Messier16.Forms.Controls"
+             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             x:Class="EDIS.Shared.Pages.Login.LoginPage"
+             Title="Login">
+    <ContentPage.Content>
+        <StackLayout Padding="15,30,15,15">
+            <Grid Padding="25">
+                <forms:CachedImage Source="logo.png"/>
+            </Grid>
+            <Entry Placeholder="Username" Text="{Binding Username}"/>
+            <Entry Placeholder="Password" Text="{Binding Password}" IsPassword="True"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="5*"/>
+                </Grid.ColumnDefinitions>
+                <controls1:Checkbox Grid.Column="0" Checked="{Binding RememberMe}" VerticalOptions="Center"/>
+                <Label Text="Remember me" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center"/>
+            </Grid>
+            <Button Text="Login" Command="{Binding LoginCommand}" Style="{StaticResource AppButton}" BackgroundColor="#0069A9"/>
+            <Button Text="Forgot Password" Command="{Binding ForgotPasswordCommand}" BackgroundColor="Transparent" BorderWidth="0"/>
+            
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

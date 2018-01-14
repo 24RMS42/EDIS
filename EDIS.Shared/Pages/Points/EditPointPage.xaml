@@ -1,0 +1,266 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="EDIS.Shared.Pages.Points.EditPointPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:abstractions="clr-namespace:CarouselView.FormsPlugin.Abstractions;assembly=CarouselView.FormsPlugin.Abstractions"
+    xmlns:behaviors="clr-namespace:EDIS.Shared.Behaviors;assembly=EDIS.Shared"
+    xmlns:controls="clr-namespace:Messier16.Forms.Controls;assembly=Messier16.Forms.Controls"
+    xmlns:controls1="clr-namespace:EDIS.Shared.Controls;assembly=EDIS.Shared"
+    Title="Edit Point">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="controls:Checkbox">
+                <Setter Property="CheckboxBackgroundColor" Value="Orange" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Padding="10">
+                <Frame
+                    Padding="5"
+                    BackgroundColor="White"
+                    HasShadow="False">
+                    <StackLayout>
+                        <!--<Grid>
+                            <Label Text="Board:"
+                           VerticalOptions="CenterAndExpand"
+                           HorizontalOptions="CenterAndExpand"
+                           FontAttributes="Bold"
+                           FontSize="16"/>
+                        </Grid>-->
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="4*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Grid Grid.Column="0" HeightRequest="50">
+                                <Image
+                                    HeightRequest="30"
+                                    HorizontalOptions="Center"
+                                    Source="leftarrow.png"
+                                    VerticalOptions="Center" />
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding PreviousBoardCommand}" />
+                                </Grid.GestureRecognizers>
+                            </Grid>
+
+                            <Grid Grid.Column="1" HeightRequest="80">
+
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding BoardSelectedCommand}" />
+                                </Grid.GestureRecognizers>
+
+                                <StackLayout
+                                    HorizontalOptions="Center"
+                                    Spacing="2"
+                                    VerticalOptions="Center">
+                                    <Label HorizontalTextAlignment="Center" Text="{Binding SelectedBoard.BoardIdentity}" />
+
+                                    <Label HorizontalTextAlignment="Center" Text="{Binding SelectedBoard.BoardLocationFloor}" />
+
+                                    <Label HorizontalTextAlignment="Center" Text="{Binding SelectedBoard.BoardLocationBlock}" />
+                                </StackLayout>
+                            </Grid>
+
+                            <!--<abstractions:CarouselViewControl
+                                x:Name="BoardsList"
+                                Grid.Column="1"
+                                HeightRequest="80"
+                                IsSwipingEnabled="False"
+                                ItemsSource="{Binding Boards}"
+                                Orientation="Horizontal"
+                                Position="{Binding CurrentBoardPosition}"
+                                ShowArrows="False"
+                                VerticalOptions="StartAndExpand" >
+                                <abstractions:CarouselViewControl.ItemTemplate>
+                                    <DataTemplate>
+
+
+
+                                    </DataTemplate>
+                                </abstractions:CarouselViewControl.ItemTemplate>
+                            </abstractions:CarouselViewControl>-->
+
+                            <Grid Grid.Column="2" HeightRequest="50">
+                                <Image
+                                    HeightRequest="30"
+                                    HorizontalOptions="Center"
+                                    Source="rightarrow.png"
+                                    VerticalOptions="Center" />
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding NextBoardCommand}" />
+                                </Grid.GestureRecognizers>
+                            </Grid>
+
+                            <Grid Grid.Column="3" HeightRequest="50">
+                                <Image
+                                    HeightRequest="30"
+                                    HorizontalOptions="Center"
+                                    Source="showList.png"
+                                    VerticalOptions="Center" />
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="TapGestureRecognizer_OnTappedBoards" />
+                                </Grid.GestureRecognizers>
+                                <Picker
+                                    x:Name="PickerBoards"
+                                    IsVisible="False"
+                                    ItemDisplayBinding="{Binding BoardIdentity}"
+                                    ItemsSource="{Binding Boards}"
+                                    SelectedIndex="{Binding CurrentBoardPosition}">
+                                    <Picker.Behaviors>
+                                        <behaviors:EventToCommandBehavior Command="{Binding IndexBoardsChangedCommand}" EventName="SelectedIndexChanged" />
+                                    </Picker.Behaviors>
+                                </Picker>
+                            </Grid>
+
+                        </Grid>
+                    </StackLayout>
+                </Frame>
+
+                <Frame
+                    Padding="5"
+                    BackgroundColor="White"
+                    HasShadow="False">
+                    <StackLayout>
+                        <!--<Grid>
+                            <Label Text="Circuit:"
+                           VerticalOptions="CenterAndExpand"
+                           HorizontalOptions="CenterAndExpand"
+                           FontAttributes="Bold"
+                           FontSize="16"/>
+                        </Grid>-->
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="4*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Grid Grid.Column="0" HeightRequest="50">
+                                <Image
+                                    HeightRequest="30"
+                                    HorizontalOptions="Center"
+                                    Source="leftarrow.png"
+                                    VerticalOptions="Center" />
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding PreviousCircuitCommand}" />
+                                </Grid.GestureRecognizers>
+                            </Grid>
+
+                            <Grid Grid.Column="1" HeightRequest="80">
+
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding CircuitSelectedCommand}" />
+                                </Grid.GestureRecognizers>
+
+                                <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                                    <Label
+                                        HorizontalTextAlignment="Center"
+                                        IsVisible="{Binding SelectedCircuit.NotBelongsToThreePhase}"
+                                        Text="{Binding SelectedCircuit.CircuitRepresentation}" />
+                                    <Label
+                                        HorizontalTextAlignment="Center"
+                                        IsVisible="{Binding SelectedCircuit.NotBelongsToThreePhase}"
+                                        Text="{Binding SelectedCircuit.CircuitOcpdPattern}" />
+                                    <Label IsVisible="{Binding SelectedCircuit.NotBelongsToThreePhase, Converter={StaticResource NegativeBooleanConverter}}" Text="{Binding SelectedCircuit.ThreePhase}" />
+                                </StackLayout>
+                            </Grid>
+
+                            <!--<abstractions:CarouselViewControl
+                                x:Name="CircuitsList"
+                                Grid.Column="1"
+                                HeightRequest="80"
+                                IsSwipingEnabled="False"
+                                ItemsSource="{Binding Circuits}"
+                                Orientation="Horizontal"
+                                Position="{Binding CurrentCircuitPosition}"
+                                ShowArrows="False"
+                                VerticalOptions="StartAndExpand">
+                                <abstractions:CarouselViewControl.ItemTemplate>
+                                    <DataTemplate>
+
+
+                                    </DataTemplate>
+                                </abstractions:CarouselViewControl.ItemTemplate>
+                            </abstractions:CarouselViewControl>-->
+
+                            <Grid Grid.Column="2" HeightRequest="50">
+                                <Image
+                                    HeightRequest="30"
+                                    HorizontalOptions="Center"
+                                    Source="rightarrow.png"
+                                    VerticalOptions="Center" />
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding NextCircuitCommand}" />
+                                </Grid.GestureRecognizers>
+                            </Grid>
+
+                            <Grid Grid.Column="3" HeightRequest="50">
+                                <Image
+                                    HeightRequest="30"
+                                    HorizontalOptions="Center"
+                                    Source="showList.png"
+                                    VerticalOptions="Center" />
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="TapGestureRecognizer_OnTappedCircuits" />
+                                </Grid.GestureRecognizers>
+                                <Picker
+                                    x:Name="PickerCircuits"
+                                    IsVisible="False"
+                                    ItemDisplayBinding="{Binding ThreePhaseRepresentation}"
+                                    ItemsSource="{Binding Circuits}"
+                                    SelectedIndex="{Binding CurrentCircuitPosition}">
+                                    <Picker.Behaviors>
+                                        <behaviors:EventToCommandBehavior Command="{Binding IndexCircuitsChangedCommand}" EventName="SelectedIndexChanged" />
+                                    </Picker.Behaviors>
+                                </Picker>
+                            </Grid>
+
+                        </Grid>
+                    </StackLayout>
+                </Frame>
+
+                <Frame
+                    Padding="5"
+                    BackgroundColor="White"
+                    HasShadow="False">
+                    <Grid
+                        Padding="5"
+                        HeightRequest="50"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand">
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="6*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding OpenEditPointDetailsCommand}" />
+                        </Grid.GestureRecognizers>
+
+                        <Label
+                            Grid.Column="1"
+                            FontAttributes="Bold"
+                            HorizontalOptions="CenterAndExpand"
+                            Text="End Points"
+                            VerticalOptions="CenterAndExpand" />
+
+                        <Grid Grid.Column="2">
+                            <Image Source="right.png" />
+                        </Grid>
+                    </Grid>
+                </Frame>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

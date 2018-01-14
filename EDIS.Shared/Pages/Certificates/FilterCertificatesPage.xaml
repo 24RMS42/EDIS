@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:EDIS.Shared.Controls;assembly=EDIS.Shared"
+             x:Class="EDIS.Shared.Pages.Certificates.FilterCertificatesPage">
+    <ContentPage.Content>
+        <StackLayout Padding="20">
+            <Grid>
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding CloseCommand}"/>
+                </Grid.GestureRecognizers>
+                <Image VerticalOptions="FillAndExpand" Source="close.png" HeightRequest="30" HorizontalOptions="End"/>
+            </Grid>
+
+            <Frame BackgroundColor="White" VerticalOptions="CenterAndExpand"
+                   HasShadow="False">
+                <StackLayout>
+                <Grid Style="{StaticResource ItemGrid}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="1"/>
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Row="0" Text="From Date Of Creation" Style="{StaticResource UpperLabel}"/>
+                    <DatePicker Grid.Row="1"  Date="{Binding FromDateOfCreation}" Format="dd-MM-yyyy" Style="{StaticResource LowerDatePicker}"/>
+
+                </Grid>
+
+                <Grid Style="{StaticResource ItemGrid}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="1"/>
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Row="0" Text="To Date Of Creation" Style="{StaticResource UpperLabel}"/>
+                    <DatePicker Grid.Row="1" Date="{Binding ToDateOfCreation}" Format="dd-MM-yyyy" Style="{StaticResource LowerDatePicker}"/>
+
+                </Grid>
+                </StackLayout>
+            </Frame>
+
+            <!--<DatePicker Date="{Binding FromDateOfCreation, StringFormat='{0:dd-MM-yyyy}'}" DefaultText="From Date Of Creation"/>
+            <DatePicker Date="{Binding ToDateOfCreation, StringFormat='{0:dd-MM-yyyy}'}" DefaultText="To Date Of Creation"/>-->
+
+            <Button Style="{StaticResource AppButton}" Text="List Certificates" Command="{Binding SearchCommand}"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="EDIS.Shared.Pages.Boards.AddRemoveBoardsPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:Messier16.Forms.Controls;assembly=Messier16.Forms.Controls"
+    Title="Add/Remove Boards">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="ItemLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="Gray" />
+                <Setter Property="FontSize" Value="10" />
+            </Style>
+            <Style x:Key="ItemValue" TargetType="Label">
+                <Setter Property="TextColor" Value="Black" />
+                <Setter Property="FontSize" Value="10" />
+                <Setter Property="FontAttributes" Value="Bold" />
+            </Style>
+            <Style x:Key="ItemStack" TargetType="StackLayout">
+                <Setter Property="Orientation" Value="Horizontal" />
+            </Style>
+            <Style TargetType="controls:Checkbox">
+                <Setter Property="CheckboxBackgroundColor" Value="Orange" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Command="{Binding Refresh}" Icon="cloudSmall.png" />
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <ListView
+                x:Name="AddRemoveBoardsList"
+                BackgroundColor="Transparent"
+                ItemsSource="{Binding Boards}"
+                RowHeight="70"
+                SeparatorVisibility="None"
+                VerticalOptions="FillAndExpand">
+
+                <x:Arguments>
+                    <ListViewCachingStrategy>RecycleElement</ListViewCachingStrategy>
+                </x:Arguments>
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell x:Name="_listItem">
+                            <Frame
+                                Margin="5"
+                                Padding="0"
+                                BackgroundColor="White"
+                                HasShadow="False">
+                                <Grid Padding="5" VerticalOptions="CenterAndExpand">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="4*" />
+                                        <ColumnDefinition Width="4*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                        <!--<RowDefinition Height="1"/>-->
+                                    </Grid.RowDefinitions>
+
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                            BindingContext="{Binding Source={x:Reference AddRemoveBoardsList}, Path=BindingContext}"
+                                            Command="{Binding BoardSelectedCommand}"
+                                            CommandParameter="{Binding Source={x:Reference _listItem}, Path=BindingContext}" />
+                                    </Grid.GestureRecognizers>
+
+                                    <controls:Checkbox
+                                        Grid.Row="0"
+                                        Grid.RowSpan="2"
+                                        Grid.Column="0"
+                                        Checked="{Binding IsSelected}"
+                                        VerticalOptions="CenterAndExpand" />
+
+                                    <StackLayout
+                                        Grid.Row="0"
+                                        Grid.Column="1"
+                                        Style="{StaticResource ItemStack}">
+                                        <Label Style="{StaticResource ItemLabel}" Text="Board Ref:" />
+
+                                        <Label Style="{StaticResource ItemValue}" Text="{Binding Board.BoardIdentity}" />
+                                    </StackLayout>
+
+                                    <StackLayout
+                                        Grid.Row="1"
+                                        Grid.Column="1"
+                                        Style="{StaticResource ItemStack}">
+                                        <Label Style="{StaticResource ItemLabel}" Text="Section" />
+
+                                        <Label Style="{StaticResource ItemValue}" Text="{Binding Board.BoardLocationBlock}" />
+                                    </StackLayout>
+                                    <StackLayout
+                                        Grid.Row="1"
+                                        Grid.Column="2"
+                                        Style="{StaticResource ItemStack}">
+                                        <Label Style="{StaticResource ItemLabel}" Text="Floor" />
+
+                                        <Label Style="{StaticResource ItemValue}" Text="{Binding Board.BoardLocationFloor}" />
+                                    </StackLayout>
+
+                                    <!--<BoxView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" WidthRequest="1000" HeightRequest="1" BackgroundColor="#dfdfdf" VerticalOptions="EndAndExpand"/>-->
+
+                                </Grid>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+            </ListView>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

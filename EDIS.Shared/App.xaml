@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:Messier16.Forms.Controls;assembly=Messier16.Forms.Controls"
+             xmlns:converters="clr-namespace:EDIS.Shared.Converters;assembly=EDIS.Shared"
+             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             x:Class="EDIS.Shared.App">
+	<Application.Resources>
+
+		<!-- Application resource dictionary -->
+        
+        <ResourceDictionary>
+            <converters:BoolIntConverter x:Key="BoolIntConverter"/>
+            <converters:BoolCharConverter x:Key="BoolCharConverter"/>
+            <converters:NegativeBooleanConverter x:Key="NegativeBooleanConverter"/>
+            <converters:FillledStringToBoolConverter x:Key="FillledStringToBoolConverter"/>
+            <converters:NullableIntConverter x:Key="NullableIntConverter"/>
+            
+            <Style x:Key="CheckboxLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="FontSize" Value="12"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+            </Style>
+            <Style x:Key="Checkbox" TargetType="controls:Checkbox">
+                <Setter Property="VerticalOptions" Value="FillAndExpand"/>
+                <Setter Property="Margin" Value="0"/>
+                <Setter Property="HeightRequest" Value="30"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            </Style>
+            <Style x:Key="UpperLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="FontSize" Value="12"/>
+                <Setter Property="VerticalOptions" Value="End"/>
+            </Style>
+            <Style x:Key="ItemGrid" TargetType="Grid">
+                <Setter Property="HeightRequest" Value="80"/>
+                <Setter Property="Padding" Value="15,0,15,0"/>
+                <Setter Property="Margin" Value="0"/>
+            </Style>
+            <Style x:Key="ItemStackLayout" TargetType="StackLayout">
+                <Setter Property="HeightRequest" Value="80"/>
+                <Setter Property="Padding" Value="15,0,15,0"/>
+                <Setter Property="Margin" Value="0"/>
+            </Style>
+            <Style x:Key="LowerEntry" TargetType="Entry">
+                <Setter Property="FontSize" Value="16"/>
+                <Setter Property="VerticalOptions" Value="End"/>
+                <Setter Property="Margin" Value="0"/>
+            </Style>
+            <Style x:Key="LowerPicker" TargetType="Picker">
+                <Setter Property="VerticalOptions" Value="End"/>
+                <Setter Property="Margin" Value="0"/>
+            </Style>
+            <Style x:Key="LowerEditor" TargetType="Editor">
+                <Setter Property="FontSize" Value="16"/>
+                <Setter Property="VerticalOptions" Value="End"/>
+                <Setter Property="Margin" Value="0"/>
+            </Style>
+            <Style x:Key="LowerDatePicker" TargetType="DatePicker">
+                <Setter Property="VerticalOptions" Value="End"/>
+                <Setter Property="Margin" Value="0"/>
+            </Style>
+            <Style x:Key="AppButton" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="#0069A9"/>
+                <Setter Property="TextColor" Value="White"/>
+            </Style>
+            <Style TargetType="ContentPage" ApplyToDerivedTypes="True">
+                <Setter Property="BackgroundColor" Value="#f6f6f6" />
+            </Style>
+            <Style x:Key="AccordionHeader" TargetType="StackLayout">
+                <Setter Property="BackgroundColor" Value="#edeeef"/>
+                <Setter Property="Padding" Value="15"/>
+                <Setter Property="Orientation" Value="Horizontal"/>
+            </Style>
+            <Style x:Key="AccordionHeaderLabel" TargetType="Label">
+                <Setter Property="VerticalTextAlignment" Value="Center"/>
+                <Setter Property="HorizontalOptions" Value="StartAndExpand"/>
+            </Style>
+            <Style x:Key="AccordionHeaderArrow" TargetType="forms:CachedImage">
+                <Setter Property="HorizontalOptions" Value="End"/>
+            </Style>
+
+        </ResourceDictionary>
+
+	</Application.Resources>
+</Application>

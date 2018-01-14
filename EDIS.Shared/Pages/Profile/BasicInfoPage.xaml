@@ -1,0 +1,206 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:Messier16.Forms.Controls;assembly=Messier16.Forms.Controls"
+             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             x:Class="EDIS.Shared.Pages.Profile.BasicInfoPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="AccordionHeader" TargetType="StackLayout">
+                <Setter Property="BackgroundColor" Value="#edeeef"/>
+                <Setter Property="Padding" Value="15"/>
+                <Setter Property="Orientation" Value="Horizontal"/>
+            </Style>
+            <Style x:Key="AccordionHeaderLabel" TargetType="Label">
+                <Setter Property="VerticalTextAlignment" Value="Center"/>
+                <Setter Property="HorizontalOptions" Value="StartAndExpand"/>
+            </Style>
+            <Style x:Key="AccordionHeaderArrow" TargetType="forms:CachedImage">
+                <Setter Property="HorizontalOptions" Value="End"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Save" Command="{Binding SaveUserBasicInfoCommand}"></ToolbarItem>
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+
+        <ScrollView >
+            <StackLayout Padding="10">
+                <!--page-->
+
+                <StackLayout Spacing="0">
+                    <!--element-->
+                    <StackLayout Style="{StaticResource AccordionHeader}">
+                        <!--label-->
+                        <Label Text="General" Style="{StaticResource AccordionHeaderLabel}"/>
+                        <forms:CachedImage x:Name="arrow1" Source="arrowDown.png" Style="{StaticResource AccordionHeaderArrow}"/>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Tapped="TapGestureRecognizerx1_OnTapped">
+                            </TapGestureRecognizer>
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+                    <StackLayout x:Name="GeneralBlock" HeightRequest="0" Scale="0" BackgroundColor="White">
+                        <!--area-->
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Text="Email" Style="{StaticResource UpperLabel}"/>
+                            <Entry Grid.Row="1" Text="{Binding User.UserEmail}" Style="{StaticResource LowerEntry}" IsEnabled="False"  />
+                        </Grid>
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Text="Full Name" Style="{StaticResource UpperLabel}"/>
+                            <Entry Grid.Row="1" Text="{Binding User.UserFullname}" Style="{StaticResource LowerEntry}" />
+                        </Grid>
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Text="Org. / Company" Style="{StaticResource UpperLabel}"/>
+                            <Entry Grid.Row="1" Text="{Binding User.UserOrganisation}" Style="{StaticResource LowerEntry}" />
+                        </Grid>
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Text="Position in Company" Style="{StaticResource UpperLabel}"/>
+                            <Entry Grid.Row="1" Text="{Binding User.UserPosition}" Style="{StaticResource LowerEntry}" />
+                        </Grid>
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Text="Physical Address" Style="{StaticResource UpperLabel}"/>
+                            <Editor Grid.Row="1" Text="{Binding User.UserAddress}" />
+                        </Grid>
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Text="Mobile" Style="{StaticResource UpperLabel}"/>
+                            <Entry Grid.Row="1" Text="{Binding User.UserMobile}" Style="{StaticResource LowerEntry}" />
+                        </Grid>
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Text="Landline" Style="{StaticResource UpperLabel}"/>
+                            <Entry Grid.Row="1" Text="{Binding User.UserLandline}" Style="{StaticResource LowerEntry}" />
+                        </Grid>
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Text="Website" Style="{StaticResource UpperLabel}"/>
+                            <Entry Grid.Row="1" Text="{Binding User.UserWebsite}" Style="{StaticResource LowerEntry}" />
+                        </Grid>
+
+                    </StackLayout>
+                </StackLayout>
+
+                <StackLayout Spacing="0">
+                    <!--element-->
+                    <StackLayout Style="{StaticResource AccordionHeader}">
+                        <!--label-->
+                        <Label Text="Logo for Certificates" Style="{StaticResource AccordionHeaderLabel}"/>
+                        <forms:CachedImage x:Name="arrow2" Source="arrowDown.png" Style="{StaticResource AccordionHeaderArrow}"/>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Tapped="TapGestureRecognizerx2_OnTapped">
+                            </TapGestureRecognizer>
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+                    <StackLayout x:Name="LogoForCertificatesBlock" HeightRequest="0" Scale="0" BackgroundColor="White">
+                        <!--area-->
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="{Binding UserLogoPath}" Style="{StaticResource UpperLabel}"/>
+
+                            <Image Grid.Row="1" >
+                                <Image.Source>
+                                    <FileImageSource File="{Binding UserLogoPath}" />
+                                </Image.Source>
+                            </Image>
+
+                        </Grid>
+
+                    </StackLayout>
+                </StackLayout>
+
+                <StackLayout Spacing="0">
+                    <!--element-->
+                    <StackLayout Style="{StaticResource AccordionHeader}">
+                        <!--label-->
+                        <Label Text="Declaraction" Style="{StaticResource AccordionHeaderLabel}"/>
+                        <forms:CachedImage x:Name="arrow3" Source="arrowDown.png" Style="{StaticResource AccordionHeaderArrow}"/>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer
+                                    Tapped="TapGestureRecognizerx3_OnTapped">
+                            </TapGestureRecognizer>
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+                    <StackLayout x:Name="DeclaractionBlock" HeightRequest="0" Scale="0" BackgroundColor="White">
+                    <!--area-->
+                    <Grid Style="{StaticResource ItemGrid}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="5*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                            <Label Grid.Column="0" Text="Subscribe to Monthly Reports" Style="{StaticResource CheckboxLabel}"/>
+                        <controls:Checkbox Grid.Column="1" Checked="{Binding User.UserSubscribedRpts, Converter={StaticResource BoolIntConverter}}" Style="{StaticResource Checkbox}"/>
+                    </Grid>
+
+                    <Grid Style="{StaticResource ItemGrid}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="5*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                            <Label Grid.Column="0" Text="I agree to the EDIS terms and conditions" Style="{StaticResource CheckboxLabel}"/>
+                        <controls:Checkbox Grid.Column="1" Checked="{Binding User.UserAcceptedTerms, Converter={StaticResource BoolCharConverter}}" Style="{StaticResource Checkbox}"/>
+                    </Grid>
+
+                </StackLayout>
+                </StackLayout>
+                
+            </StackLayout>
+        </ScrollView>
+
+    </ContentPage.Content>
+</ContentPage>

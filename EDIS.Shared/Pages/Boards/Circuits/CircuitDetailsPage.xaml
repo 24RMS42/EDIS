@@ -1,0 +1,340 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:controls="clr-namespace:Messier16.Forms.Controls;assembly=Messier16.Forms.Controls"
+             x:Class="EDIS.Shared.Pages.Boards.Circuits.CircuitDetailsPage">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Save" Command="{Binding Save}"/>
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <ScrollView Padding="10">
+            <StackLayout>
+
+                <StackLayout Spacing="0">
+                    <!--element-->
+                    <StackLayout Style="{StaticResource AccordionHeader}">
+                        <!--label-->
+                        <Label Text="Circuit details" Style="{StaticResource AccordionHeaderLabel}"/>
+                        <forms:CachedImage x:Name="arrow1" Source="arrowDown.png" Style="{StaticResource AccordionHeaderArrow}"/>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Tapped="TapGestureRecognizerx1_OnTapped">
+                            </TapGestureRecognizer>
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+                    <StackLayout x:Name="CircuitDetails" HeightRequest="0" Scale="0" BackgroundColor="White">
+
+                        <Grid Style="{StaticResource ItemGrid}" IsVisible="{Binding IsThreePhaseBoard}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="5*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Grid.Column="0" Text="Three Phase Circuit" Style="{StaticResource CheckboxLabel}"/>
+                            <controls:Checkbox Grid.Column="1" Checked="{Binding CircuitIs3Phase, Converter={StaticResource BoolCharConverter}}" Style="{StaticResource Checkbox}"/>
+                        </Grid>
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="No." Style="{StaticResource UpperLabel}"/>
+                            <Entry Grid.Row="1" Keyboard="Numeric" Text="{Binding Circuit.CircuitReference}" Style="{StaticResource LowerEntry}"/>
+                        </Grid>
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="Phase" Style="{StaticResource UpperLabel}"/>
+                            <!--<Entry Grid.Row="1" Text="{Binding Circuit.CircuitPhase}" Style="{StaticResource LowerEntry}"/>-->
+                            <Picker Grid.Row="1" ItemsSource="{Binding CircuitPhases}" Style="{StaticResource LowerPicker}" SelectedItem="{Binding SelectedCircuitPhase}"/>
+                        </Grid>
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="Circuit Description" Style="{StaticResource UpperLabel}"/>
+                            <Entry Grid.Row="1" Text="{Binding Circuit.CircuitEquipmentConnected}" Style="{StaticResource LowerEntry}"/>
+                        </Grid>
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="5*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Grid.Column="0" Text="Sub-Main" Style="{StaticResource CheckboxLabel}"/>
+                            <controls:Checkbox Grid.Column="1" Checked="{Binding Circuit.CircuitIsSubMain, Converter={StaticResource BoolCharConverter}}" Style="{StaticResource Checkbox}"/>
+                        </Grid>
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="Cable Type" Style="{StaticResource UpperLabel}"/>
+                            <!--<Entry Grid.Row="1" Text="{Binding Circuit.CircuitConductorSizeType}" Style="{StaticResource LowerEntry}"/>-->
+                            <Picker Grid.Row="1" ItemsSource="{Binding ConductorSizeTypes}" Style="{StaticResource LowerPicker}" ItemDisplayBinding="{Binding ConductorSizeTypeRepresentation}" SelectedItem="{Binding SelectedConductorSizeType}"/>
+                        </Grid>
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="Other" Style="{StaticResource UpperLabel}"/>
+                            <Entry Grid.Row="1" IsEnabled="{Binding IsOther}" Text="{Binding Circuit.CircuitCableOtherText}" Style="{StaticResource LowerEntry}"/>
+                        </Grid>
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="Reference method" Style="{StaticResource UpperLabel}"/>
+                            <!--<Entry Grid.Row="1" Text="{Binding Circuit.CircuitReferenceMethod}" Style="{StaticResource LowerEntry}"/>-->
+                            <Picker Grid.Row="1" ItemsSource="{Binding CableReferenceMethods}" Style="{StaticResource LowerPicker}" ItemDisplayBinding="{Binding RefMethodRepresentation}" SelectedItem="{Binding SelectedCableReferenceMethod}"/>
+                        </Grid>
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="Enter reference method:" Style="{StaticResource UpperLabel}"/>
+                            <Entry Grid.Row="1" Text="{Binding Circuit.CircuitReferenceMethod}" Style="{StaticResource LowerEntry}"/>
+                        </Grid>
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="Number of points" Style="{StaticResource UpperLabel}"/>
+                            <Entry Grid.Row="1" Keyboard="Numeric" Text="{Binding Circuit.CircuitNumberOfPoints}" Style="{StaticResource LowerEntry}"/>
+                        </Grid>
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="5*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Grid.Row="0" Text="CSA Live" Style="{StaticResource UpperLabel}"/>
+                            <!--<Entry Grid.Row="1" Text="{Binding Circuit.CircuitConductorCsaLive}" Style="{StaticResource LowerEntry}"/>-->
+                            <!--<Picker Grid.Row="1" ItemsSource="{Binding CsaLives}" Style="{StaticResource LowerPicker}" ItemDisplayBinding="{Binding CsaLiveValue}" SelectedItem="{Binding SelectedCsaLive}"/>-->
+                            <Entry Grid.Row="1" Grid.Column="0" Text="{Binding CsaLive}" Style="{StaticResource LowerEntry}"/>
+                            <Grid Grid.Row="1" Grid.Column="1">
+                                <forms:CachedImage Source="dots.png" HeightRequest="30" VerticalOptions="Start"/>
+                                <Picker x:Name="CsaLivePicker" IsVisible="False" ItemsSource="{Binding CsaLives}" Style="{StaticResource LowerPicker}" ItemDisplayBinding="{Binding CsaLiveValue}" SelectedItem="{Binding SelectedCsaLive}"/>
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="TapGestureRecognizer3_OnTapped"/>
+                                </Grid.GestureRecognizers>
+                            </Grid>
+                        </Grid>
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="5*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+
+                            <Label Grid.Row="0" Text="CSA CPC" Style="{StaticResource UpperLabel}"/>
+                            <!--<Entry Grid.Row="1" Text="{Binding Circuit.CircuitConductorCsaCpc}" Style="{StaticResource LowerEntry}"/>-->
+                            <!--<Picker Grid.Row="1" ItemsSource="{Binding CsaCpcs}" Style="{StaticResource LowerPicker}" ItemDisplayBinding="{Binding CsaCpcValue}" SelectedItem="{Binding SelectedCsaCpc}"/>-->
+                            <Entry Grid.Row="1" Grid.Column="0" Text="{Binding CsaCpc}" Style="{StaticResource LowerEntry}"/>
+                            <Grid Grid.Row="1" Grid.Column="1">
+                                <forms:CachedImage Source="dots.png" HeightRequest="30" VerticalOptions="Start"/>
+                                <Picker x:Name="CsaCpcPicker" IsVisible="False" ItemsSource="{Binding CsaCpcs}" Style="{StaticResource LowerPicker}" ItemDisplayBinding="{Binding CsaCpcValue}" SelectedItem="{Binding SelectedCsaCpc}"/>
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="TapGestureRecognizer4_OnTapped"/>
+                                </Grid.GestureRecognizers>
+                            </Grid>
+                        </Grid>
+
+                    </StackLayout>
+                </StackLayout>
+
+                <StackLayout Spacing="0">
+                    <!--element-->
+                    <StackLayout Style="{StaticResource AccordionHeader}">
+                        <!--label-->
+                        <Label Text="Over Current Protection" Style="{StaticResource AccordionHeaderLabel}"/>
+                        <forms:CachedImage x:Name="arrow2" Source="arrowDown.png" Style="{StaticResource AccordionHeaderArrow}"/>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer
+                                    Tapped="TapGestureRecognizerx2_OnTapped">
+                            </TapGestureRecognizer>
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+                    <StackLayout x:Name="OverCurrentProtection" HeightRequest="0" Scale="0" BackgroundColor="White">
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="Max Disconnection Time" Style="{StaticResource UpperLabel}"/>
+                            <Picker Grid.Row="1" ItemsSource="{Binding DisconnectionTimes}" Style="{StaticResource LowerPicker}" SelectedItem="{Binding SelectedDisconnectionTime}"/>
+                        </Grid>
+
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="BS(EN) &amp; Type" Style="{StaticResource UpperLabel}"/>
+                            <Picker Grid.Row="1" ItemsSource="{Binding BsenTypes}" Style="{StaticResource LowerPicker}" SelectedItem="{Binding SelectedBsenType}" ItemDisplayBinding="{Binding Representation}"/>
+                        </Grid>
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="Rating" Style="{StaticResource UpperLabel}"/>
+                            <Picker Grid.Row="1" ItemsSource="{Binding Ratings}" Style="{StaticResource LowerPicker}" SelectedItem="{Binding SelectedRating}"/>
+                        </Grid>
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="Max Zs" Style="{StaticResource UpperLabel}"/>
+                            <Entry Grid.Row="1" IsEnabled="False" Text="{Binding SelectedMaxZs}" Style="{StaticResource LowerEntry}"/>
+                        </Grid>
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="Short Circuit Capacity" Style="{StaticResource UpperLabel}"/>
+                            <Entry Grid.Row="1" Keyboard="Numeric" Text="{Binding Circuit.CircuitOcpdScc}" Style="{StaticResource LowerEntry}"/>
+                        </Grid>
+
+                    </StackLayout>
+                </StackLayout>
+
+                <StackLayout Spacing="0">
+                    <!--element-->
+                    <StackLayout Style="{StaticResource AccordionHeader}">
+                        <!--label-->
+                        <Label Text="Circuit RCD" Style="{StaticResource AccordionHeaderLabel}"/>
+                        <forms:CachedImage x:Name="arrow3" Source="arrowDown.png" Style="{StaticResource AccordionHeaderArrow}"/>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer
+                                    Tapped="TapGestureRecognizerx3_OnTapped">
+                            </TapGestureRecognizer>
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+                    <StackLayout x:Name="CircuitRcd" HeightRequest="0" Scale="0" BackgroundColor="White">
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="5*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Grid.Row="0" Text="RCD BS(EN)" Style="{StaticResource UpperLabel}"/>
+                            <Entry Grid.Row="1" Grid.Column="0" Text="{Binding RcdType}" Style="{StaticResource LowerEntry}"/>
+                            <Grid Grid.Row="1" Grid.Column="1">
+                                <forms:CachedImage Source="dots.png" HeightRequest="30" VerticalOptions="Start"/>
+                                <Picker x:Name="RcdTypePicker" IsVisible="False" ItemsSource="{Binding RcdTypes}" Style="{StaticResource LowerPicker}" ItemDisplayBinding="{Binding RcdType}" SelectedItem="{Binding SelectedRcdType}"/>
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="TapGestureRecognizer1_OnTapped"/>
+                                </Grid.GestureRecognizers>
+                            </Grid>
+                        </Grid>
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="No. of Poles" Style="{StaticResource UpperLabel}"/>
+                            <Entry Grid.Row="1" Keyboard="Numeric" Text="{Binding Circuit.CircuitRcdPoles}" Style="{StaticResource LowerEntry}"/>
+                        </Grid>
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="5*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="RCD rating IΔn (mA)" Style="{StaticResource UpperLabel}"/>
+                            <Entry Grid.Row="1" Keyboard="Numeric" Grid.Column="0" Text="{Binding RcdOpCurrent}" Style="{StaticResource LowerEntry}"/>
+                            <Grid Grid.Row="1" Grid.Column="1">
+                                <forms:CachedImage Source="dots.png" HeightRequest="30" VerticalOptions="Start"/>
+                                <Picker x:Name="RcdOpCurrentPicker" IsVisible="False" ItemsSource="{Binding RcdOpCurrents}" Style="{StaticResource LowerPicker}" ItemDisplayBinding="{Binding RcdOpCurrent}" SelectedItem="{Binding SelectedRcdOpCurrent}"/>
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="TapGestureRecognizer2_OnTapped"/>
+                                </Grid.GestureRecognizers>
+                            </Grid>
+                        </Grid>
+                    </StackLayout>
+                </StackLayout>
+
+            </StackLayout>
+
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

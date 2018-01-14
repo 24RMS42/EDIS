@@ -1,0 +1,359 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:controls="clr-namespace:EDIS.Shared.Controls;assembly=EDIS.Shared"
+             xmlns:models="clr-namespace:EDIS.Shared.Models;assembly=EDIS.Shared"
+             x:Class="EDIS.Shared.Pages.Certificates.CertificateDetails.BasicInfoPage">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Save" Command="{Binding SaveCertificateCommand}"></ToolbarItem>
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+
+        <ScrollView >
+            <StackLayout Padding="10">
+                <!--page-->
+
+                <StackLayout Spacing="0">
+                    <!--element-->
+                    <StackLayout Style="{StaticResource AccordionHeader}">
+                        <!--label-->
+                        <Label Text="Details of the Client" Style="{StaticResource AccordionHeaderLabel}"/>
+                        <forms:CachedImage x:Name="arrow1" Source="arrowDown.png" Style="{StaticResource AccordionHeaderArrow}"/>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Tapped="TapGestureRecognizerx1_OnTapped">
+                            </TapGestureRecognizer>
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+                    <StackLayout x:Name="DetailsOfTheClient" HeightRequest="0" Scale="0" BackgroundColor="White">
+                        <!--area-->
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="Client" Style="{StaticResource UpperLabel}"/>
+                            <Entry Grid.Row="1" Text="{Binding Certificate.BuildingOrganizationResponsible}" Style="{StaticResource LowerEntry}"/>
+                        </Grid>
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="Address" Style="{StaticResource UpperLabel}"/>
+                            <Entry Grid.Row="1" Text="{Binding Certificate.BuildingRespPersonAddress1}" Style="{StaticResource LowerEntry}"/>
+                        </Grid>
+
+                    </StackLayout>
+                </StackLayout>
+
+                <StackLayout Spacing="0">
+                    <!--element-->
+                    <StackLayout Style="{StaticResource AccordionHeader}">
+                        <!--label-->
+                        <Label Text="Purpose of the Report" Style="{StaticResource AccordionHeaderLabel}"/>
+                        <forms:CachedImage x:Name="arrow2" Source="arrowDown.png" Style="{StaticResource AccordionHeaderArrow}"/>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Tapped="TapGestureRecognizerx2_OnTapped">
+                            </TapGestureRecognizer>
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+                    <StackLayout x:Name="PurposeOfTheReport" HeightRequest="0" Scale="0" BackgroundColor="White">
+                        <!--area-->
+                        <Grid Style="{StaticResource ItemGrid}" HeightRequest="100">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="3*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="Description" Style="{StaticResource UpperLabel}"/>
+                            <Editor Grid.Row="1" HeightRequest="100" Text="{Binding Certificate.CertDescription}" Style="{StaticResource LowerEditor}"/>
+                        </Grid>
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="Created On" Style="{StaticResource UpperLabel}"/>
+                            <DatePicker IsEnabled="False" Grid.Row="1" Date="{Binding Certificate.CertDateCreated}" Style="{StaticResource LowerDatePicker}"/>
+                        </Grid>
+                    </StackLayout>
+                </StackLayout>
+
+                <StackLayout Spacing="0">
+                    <!--element-->
+                    <StackLayout Style="{StaticResource AccordionHeader}">
+                        <!--label-->
+                        <Label Text="Details of Installation" Style="{StaticResource AccordionHeaderLabel}"/>
+                        <forms:CachedImage x:Name="arrow3" Source="arrowDown.png" Style="{StaticResource AccordionHeaderArrow}"/>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Tapped="TapGestureRecognizerx3_OnTapped">
+                            </TapGestureRecognizer>
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+                    <StackLayout x:Name="DetailsOfInstallation" HeightRequest="0" Scale="0" BackgroundColor="White">
+                        <!--area-->
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="Occupier" Style="{StaticResource UpperLabel}"/>
+                            <Entry Grid.Row="1" Text="{Binding Certificate.BuildingOccupierName}" Style="{StaticResource LowerEntry}"/>
+                        </Grid>
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="Address" Style="{StaticResource UpperLabel}"/>
+                            <Entry Grid.Row="1" Text="{Binding Certificate.BuildingOccupierAddress1}" Style="{StaticResource LowerEntry}"/>
+                        </Grid>
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="Description of premises" Style="{StaticResource UpperLabel}"/>
+                            <Entry Grid.Row="1" IsEnabled="False" Text="{Binding Certificate.DescriptionOfPremises}" Style="{StaticResource LowerEntry}"/>
+                        </Grid>
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="Estimated age of installation (in years)" Style="{StaticResource UpperLabel}"/>
+                            <Entry Grid.Row="1" Keyboard="Numeric" Text="{Binding Certificate.BuildingAgeOfInstallation, Converter={StaticResource NullableIntConverter}}" Style="{StaticResource LowerEntry}"/>
+                        </Grid>
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="Records of installation available" Style="{StaticResource UpperLabel}"/>
+                            <Entry Grid.Row="1" Text="{Binding Certificate.InstallationRecordsLocation}" Style="{StaticResource LowerEntry}"/>
+                        </Grid>
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="Records held by" Style="{StaticResource UpperLabel}"/>
+                            <Entry Grid.Row="1" Text="{Binding Certificate.RecordsHeldBy}" Style="{StaticResource LowerEntry}"/>
+                        </Grid>
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="Evidence of alterations/additions" Style="{StaticResource UpperLabel}"/>
+                            <!--<Entry Grid.Row="1" Text="{Binding Certificate.CertInspectionBuildingEvidenceOfAlteration}" Style="{StaticResource LowerEntry}"/>-->
+                            <Picker Grid.Row="1" SelectedItem="{Binding Certificate.CertInspectionBuildingEvidenceOfAlteration}" Style="{StaticResource LowerPicker}">
+                                <Picker.ItemsSource>
+                                    <x:Array Type="{x:Type x:String}">
+                                        <x:String>Yes</x:String>
+                                        <x:String>No</x:String>
+                                        <x:String></x:String>
+                                    </x:Array>
+                                </Picker.ItemsSource>
+                            </Picker>
+                        </Grid>
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="Estimated age of alterations/additions (in years)" Style="{StaticResource UpperLabel}"/>
+                            <Entry Grid.Row="1" Keyboard="Numeric" Text="{Binding Certificate.CertInspectionBuildingAgeOfAlteration, Converter={StaticResource NullableIntConverter}}" Style="{StaticResource LowerEntry}"/>
+                        </Grid>
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="Date of Previous inspection" Style="{StaticResource UpperLabel}"/>
+                            <controls:DatePickerButton Grid.Row="1" Text="Select Date" Date="{Binding Certificate.CertInspectionPreviousInspectionDate}" Style="{StaticResource LowerDatePicker}"/>
+                        </Grid>
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="Comments on Previous Inspection" Style="{StaticResource UpperLabel}"/>
+                            <Entry Grid.Row="1" Text="{Binding Certificate.CertInspectionPreviousInspectionComments}" Style="{StaticResource LowerEntry}"/>
+                        </Grid>
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="Previous inspection certificate/report number" Style="{StaticResource UpperLabel}"/>
+                            <Entry Grid.Row="1" Text="{Binding Certificate.CertInspectionPreviousCertNumber}" Style="{StaticResource LowerEntry}"/>
+                        </Grid>
+                    </StackLayout>
+                </StackLayout>
+
+                <StackLayout Spacing="0">
+                    <!--element-->
+                    <StackLayout Style="{StaticResource AccordionHeader}">
+                        <!--label-->
+                        <Label Text="Associated Contractor and Supervisor" Style="{StaticResource AccordionHeaderLabel}"/>
+                        <forms:CachedImage x:Name="arrow4" Source="arrowDown.png" Style="{StaticResource AccordionHeaderArrow}"/>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Tapped="TapGestureRecognizerx4_OnTapped">
+                            </TapGestureRecognizer>
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+                    <StackLayout x:Name="AssociatedContractorAndSupervisor" Scale="0" HeightRequest="0" BackgroundColor="White">
+                        <!--area-->
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="Approved Contractor" Style="{StaticResource UpperLabel}"/>
+                            <Picker Grid.Row="1" ItemsSource="{Binding Contractors}" ItemDisplayBinding="{Binding UserFullname}" Title="Select a Contractor" SelectedItem="{Binding SelectedContractor}" Style="{StaticResource LowerPicker}"/>
+                        </Grid>
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="Approved Electrical Supervisor" Style="{StaticResource UpperLabel}"/>
+                            <Picker Grid.Row="1" ItemsSource="{Binding Supervisors}" ItemDisplayBinding="{Binding UserFullname}" Title="Select a Supervisor" SelectedItem="{Binding SelectedSupervisor}" Style="{StaticResource LowerPicker}"/>
+                        </Grid>
+
+                    </StackLayout>
+                </StackLayout>
+
+                <StackLayout Spacing="0">
+                    <!--element-->
+                    <StackLayout Style="{StaticResource AccordionHeader}">
+                        <!--label-->
+                        <Label Text="Extent and Limitations of Inspection" Style="{StaticResource AccordionHeaderLabel}"/>
+                        <forms:CachedImage x:Name="arrow5" Source="arrowDown.png" Style="{StaticResource AccordionHeaderArrow}"/>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Tapped="TapGestureRecognizerx5_OnTapped">
+                            </TapGestureRecognizer>
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+                    <StackLayout x:Name="ExtentAndLimitationsOfInspection" Scale="0" HeightRequest="0" BackgroundColor="White">
+                        <!--area-->
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="Extent of installation covered by this report" Style="{StaticResource UpperLabel}"/>
+                            <Entry Grid.Row="1" Text="{Binding Certificate.CertInspectionExtentCovered}" Style="{StaticResource LowerEntry}"/>
+                        </Grid>
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="Agreed limitations, if any on the inspection" Style="{StaticResource UpperLabel}"/>
+                            <Entry Grid.Row="1" Text="{Binding Certificate.CertAgreedLimitations}" Style="{StaticResource LowerEntry}"/>
+                        </Grid>
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="Limitations (Agreed with)" Style="{StaticResource UpperLabel}"/>
+                            <Entry Grid.Row="1" Text="{Binding Certificate.CertAgreedWith}" Style="{StaticResource LowerEntry}"/>
+                        </Grid>
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="Operational limitations (if any)" Style="{StaticResource UpperLabel}"/>
+                            <Entry Grid.Row="1" Text="{Binding Certificate.CertOperationalLimitations}" Style="{StaticResource LowerEntry}"/>
+                        </Grid>
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="In accordance with BS 7671:2008, ammended on" Style="{StaticResource UpperLabel}"/>
+                            <Picker Grid.Row="1" ItemsSource="{Binding BsAmendmentDates}" ItemDisplayBinding="{Binding CertDateAmended}" SelectedItem="{Binding SelectedBsAmendmentDate}" Style="{StaticResource LowerPicker}"/>
+                        </Grid>
+
+                        <!--TODO: check what is going here-->
+                    </StackLayout>
+                </StackLayout>
+
+            </StackLayout>
+        </ScrollView>
+
+    </ContentPage.Content>
+</ContentPage>

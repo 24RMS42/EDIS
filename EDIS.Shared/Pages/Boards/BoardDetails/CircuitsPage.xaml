@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:Messier16.Forms.Controls;assembly=Messier16.Forms.Controls"
+             x:Class="EDIS.Shared.Pages.Boards.BoardDetails.CircuitsPage">
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="controls:Checkbox">
+                <Setter Property="CheckboxBackgroundColor" Value="Orange"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Cancel" Command="{Binding CancelCheckedCircuitsCommand}"/>
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout Orientation="Horizontal"
+                         VerticalOptions="Start"
+                         Padding="10">
+                <controls:Checkbox Checked="{Binding SelectAll}" VerticalOptions="Center" HeightRequest="30"/>
+                <Label Text="Select All" VerticalOptions="Center"/>
+            </StackLayout>
+
+            <ListView x:Name="CircuitsList"
+                      ItemsSource="{Binding Circuits}"
+                      VerticalOptions="FillAndExpand"
+                      RowHeight="70"
+                      SeparatorVisibility="None"
+                      BackgroundColor="Transparent">
+
+                <x:Arguments>
+                    <ListViewCachingStrategy>RecycleElement</ListViewCachingStrategy>
+                </x:Arguments>
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell x:Name="_listItem">
+                            <Frame Margin="5"
+                                   Padding="0"
+                                   BackgroundColor="White"
+                                   HasShadow="False">
+                            <Grid Padding="5"
+                                  VerticalOptions="CenterAndExpand">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="8*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <!--<RowDefinition Height="1"/>-->
+                                </Grid.RowDefinitions>
+
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer BindingContext="{Binding Source={x:Reference CircuitsList}, Path=BindingContext}"
+                                                          Command="{Binding CircuitSelectedCommand}"
+                                                          CommandParameter="{Binding Source={x:Reference _listItem}, Path=BindingContext}"/>
+                                </Grid.GestureRecognizers>
+
+                                <controls:Checkbox Checked="{Binding IsSelected}"
+                                                   Grid.Column="0"/>
+
+                                <Grid Grid.Column="1" VerticalOptions="Center">
+                                    <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+                                        <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand">
+                                            <Label FontSize="10" Text="Circuit Number: " />
+                                                <Label FontSize="10" Text="{Binding Circuit.ThreePhaseRepresentation}" TextColor="#1E90FF"/>
+                                        </StackLayout>
+                                        <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                                            <Label FontSize="10" Text="No. of Points:" />
+                                            <Label FontSize="10" Text="{Binding Circuit.CircuitNumberOfPoints}" TextColor="#1E90FF"/>
+                                        </StackLayout>
+                                    </StackLayout>
+                                </Grid>
+
+                                <Grid Grid.Column="2">
+                                    <Image Source="right.png"/>
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer BindingContext="{Binding Source={x:Reference CircuitsList}, Path=BindingContext}"
+                                                              Command="{Binding CircuitSelectedToMoveCommand}"
+                                                              CommandParameter="{Binding Source={x:Reference _listItem}, Path=BindingContext}"/>
+                                    </Grid.GestureRecognizers>
+                                </Grid>
+
+                                <!--<BoxView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" WidthRequest="1000" HeightRequest="1" Color="#dfdfdf"/>-->
+
+                            </Grid>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

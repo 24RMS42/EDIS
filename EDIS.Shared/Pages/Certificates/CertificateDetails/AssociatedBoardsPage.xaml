@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             x:Class="EDIS.Shared.Pages.Certificates.CertificateDetails.AssociatedBoardsPage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="ItemLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="Gray"/>
+                <Setter Property="FontSize" Value="10"/>
+            </Style>
+            <Style x:Key="ItemValue" TargetType="Label">
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="FontSize" Value="10"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+            </Style>
+            <Style x:Key="ItemStack" TargetType="StackLayout">
+                <Setter Property="Orientation" Value="Horizontal"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <AbsoluteLayout>
+            <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1"
+                         AbsoluteLayout.LayoutFlags="All"
+                         Padding="10">
+                <!--<Frame VerticalOptions="FillAndExpand" 
+                       BackgroundColor="White"
+                       Padding="0">-->
+                <ListView x:Name="AssociatedBoardsList"
+                      ItemsSource="{Binding AssociatedBoards}"
+                      VerticalOptions="FillAndExpand"
+                      RowHeight="70"
+                      SeparatorVisibility="None"
+                      SelectedItem="{Binding SelectedBoard}"
+                          BackgroundColor="Transparent">
+
+                    <x:Arguments>
+                        <ListViewCachingStrategy>RecycleElement</ListViewCachingStrategy>
+                    </x:Arguments>
+
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell x:Name="_listItem">
+                                <Frame Padding="0"
+                                       Margin="5"
+                                       HasShadow="False"
+                                       BackgroundColor="White">
+                                <Grid Padding="5">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <!--<RowDefinition Height="1"/>-->
+                                    </Grid.RowDefinitions>
+
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer BindingContext="{Binding Source={x:Reference AssociatedBoardsList}, Path=BindingContext}"
+                                                          Command="{Binding BoardSelectedCommand}"
+                                                          CommandParameter="{Binding Source={x:Reference _listItem}, Path=BindingContext}"/>
+                                    </Grid.GestureRecognizers>
+
+                                        <StackLayout Grid.Column="0"
+                                             Grid.Row="0"
+                                             Style="{StaticResource ItemStack}">
+                                            <Label Text="Board Ref:"
+                                           Style="{StaticResource ItemLabel}"/>
+
+                                            <Label Text="{Binding BoardIdentity}"
+                                           Style="{StaticResource ItemValue}"/>
+                                        </StackLayout>
+                                        <StackLayout Grid.Column="0"
+                                             Grid.Row="1"
+                                             Style="{StaticResource ItemStack}">
+                                        <Label Text="Section:"
+                                       Style="{StaticResource ItemLabel}"/>
+
+                                        <Label Text="{Binding BoardLocationBlock}"
+                                       Style="{StaticResource ItemValue}"/>
+                                    </StackLayout>
+                                    <StackLayout Grid.Column="1"
+                                             Grid.Row="1"
+                                             Style="{StaticResource ItemStack}">
+                                        <Label Text="Floor:"
+                                       Style="{StaticResource ItemLabel}"/>
+
+                                        <Label Text="{Binding BoardLocationFloor}"
+                                       Style="{StaticResource ItemValue}"/>
+                                    </StackLayout>
+
+                                    <!--<BoxView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" WidthRequest="1000" HeightRequest="1" BackgroundColor="#dfdfdf" VerticalOptions="EndAndExpand"/>-->
+
+                                </Grid>
+                                </Frame>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+
+                </ListView>
+                <!--</Frame>-->
+
+                <Button VerticalOptions="End" Style="{StaticResource AppButton}" Text="Add/Remove Boards" Command="{Binding AddRemoveBoardsCommand}"/>
+
+                <StackLayout  
+                    x:Name="warning"   
+                    VerticalOptions="End"
+                    Spacing="0"
+                    TranslationY="0"
+                    IsVisible="{Binding DoesEveryBoardHasAssociatedCircuit, Converter={StaticResource NegativeBooleanConverter}}">
+
+                    <Grid Margin="0" HeightRequest="50">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackLayout Grid.Column="1" HorizontalOptions="End" Orientation="Horizontal" BackgroundColor="White" Opacity="0.5">
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizer_OnTapped"/>
+                            </StackLayout.GestureRecognizers>
+                            <forms:CachedImage Source="warning.png"/>
+                            <forms:CachedImage x:Name="arrow" Source="arrowDown.png"/>
+                        </StackLayout>
+                    </Grid>
+
+                    <Grid x:Name="errorMessage" BackgroundColor="Orange" Padding="10">
+                        <StackLayout>
+                            <Label Text="Warning" FontAttributes="Bold" FontSize="15"/>
+                            <Label Text="{Binding ErrorMessage}"/>
+                        </StackLayout>
+                    </Grid>
+
+                </StackLayout>
+
+            </StackLayout>
+
+            
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,517 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:controls="clr-namespace:EDIS.Shared.Controls;assembly=EDIS.Shared"
+             xmlns:behaviors="clr-namespace:EDIS.Shared.Behaviors;assembly=EDIS.Shared"
+             x:Class="EDIS.Shared.Pages.Boards.BoardDetails.BasicInfoPage">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Save" Command="{Binding Save}"/>
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Padding="10">
+
+                <StackLayout Spacing="0">
+                    <!--element-->
+                    <StackLayout Style="{StaticResource AccordionHeader}">
+                        <!--label-->
+                        <Label Text="Information" Style="{StaticResource AccordionHeaderLabel}"/>
+                        <forms:CachedImage x:Name="arrow1" Source="arrowDown.png" Style="{StaticResource AccordionHeaderArrow}"/>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Tapped="TapGestureRecognizerx1_OnTapped">
+                            </TapGestureRecognizer>
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+                    <StackLayout x:Name="Information" HeightRequest="0" Scale="0" BackgroundColor="White">
+                        <!--area-->
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="Board Reference" Style="{StaticResource UpperLabel}"/>
+                            <Entry Grid.Row="1" Text="{Binding Board.BoardReference}" Style="{StaticResource LowerEntry}"/>
+                        </Grid>
+                       
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="Board Reference Type" Style="{StaticResource UpperLabel}"/>
+                            <!--<Entry Grid.Row="1" Text="{Binding Board.BoardReferenceType}" Style="{StaticResource LowerEntry}"/>-->
+                            <Picker Grid.Row="1" ItemsSource="{Binding BoardReferenceTypes}" Style="{StaticResource LowerPicker}" ItemDisplayBinding="{Binding BoardReferenceType}" SelectedItem="{Binding SelectedBoardReferenceType}"/>
+                        </Grid>
+                     
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="Board Function" Style="{StaticResource UpperLabel}"/>
+                            <Entry Grid.Row="1" Text="{Binding Board.BoardFunction}" Style="{StaticResource LowerEntry}"/>
+                        </Grid>
+                     
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="Board Manufacturer" Style="{StaticResource UpperLabel}"/>
+                            <Entry Grid.Row="1" Text="{Binding Board.BoardManufacturer}" Style="{StaticResource LowerEntry}"/>
+                        </Grid>
+                
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="Board Phase" Style="{StaticResource UpperLabel}"/>
+                            <!--<Entry Grid.Row="1" Text="{Binding Board.BoardPhase}" Style="{StaticResource LowerEntry}"/>-->
+                            <Picker Grid.Row="1" ItemsSource="{Binding Phases}" Style="{StaticResource LowerPicker}" ItemDisplayBinding="{Binding PhaseValue}" SelectedItem="{Binding SelectedPhase}"/>
+                        </Grid>
+                    
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="Circuit Naming Convention" Style="{StaticResource UpperLabel}"/>
+                            <!--<Entry Grid.Row="1" Text="{Binding Board.BoardCircuitPhaseNaming}" Style="{StaticResource LowerEntry}"/>-->
+                            <Picker Grid.Row="1" ItemsSource="{Binding NamingConventions}" Style="{StaticResource LowerPicker}" ItemDisplayBinding="{Binding NamingConvention}" SelectedItem="{Binding SelectedNamingConvention}"/>
+                        </Grid>
+                     
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="Board Ways" Style="{StaticResource UpperLabel}"/>
+                            <Entry Grid.Row="1" Keyboard="Numeric" Text="{Binding Board.BoardWays}" Style="{StaticResource LowerEntry}"/>
+                        </Grid>
+                      
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="Board Type" Style="{StaticResource UpperLabel}"/>
+                            <Entry Grid.Row="1" Text="{Binding Board.BoardType}" Style="{StaticResource LowerEntry}"/>
+                        </Grid>
+                       
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="Board Rating (A)" Style="{StaticResource UpperLabel}"/>
+                            <Entry Grid.Row="1" Keyboard="Numeric" Text="{Binding Board.BoardRating}" Style="{StaticResource LowerEntry}"/>
+                        </Grid>
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="Nominal Voltage (V)" Style="{StaticResource UpperLabel}"/>
+                            <Entry Grid.Row="1" Keyboard="Numeric" Text="{Binding Board.BoardNominalVoltage, Converter={StaticResource NullableIntConverter}}" Style="{StaticResource LowerEntry}"/>
+                        </Grid>
+
+                    </StackLayout>
+                </StackLayout>
+
+                <StackLayout Spacing="0">
+                    <!--element-->
+                    <StackLayout Style="{StaticResource AccordionHeader}">
+                        <!--label-->
+                        <Label Text="Board Location" Style="{StaticResource AccordionHeaderLabel}"/>
+                        <forms:CachedImage x:Name="arrow2" Source="arrowDown.png" Style="{StaticResource AccordionHeaderArrow}"/>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Tapped="TapGestureRecognizerx2_OnTapped">
+                            </TapGestureRecognizer>
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+                    <StackLayout x:Name="BoardLocation" HeightRequest="0" Scale="0" BackgroundColor="White">
+                        <!--area-->
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="Section" Style="{StaticResource UpperLabel}"/>
+                            <Entry Grid.Row="1" Text="{Binding Board.BoardLocationBlock}" Style="{StaticResource LowerEntry}"/>
+                        </Grid>
+                   
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="Floor" Style="{StaticResource UpperLabel}"/>
+                            <Entry Grid.Row="1" Text="{Binding Board.BoardLocationFloor}" Style="{StaticResource LowerEntry}"/>
+                        </Grid>
+                    
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="Location" Style="{StaticResource UpperLabel}"/>
+                            <Entry Grid.Row="1" Text="{Binding Board.BoardLocation}" Style="{StaticResource LowerEntry}"/>
+                        </Grid>
+                  
+                    </StackLayout>
+                </StackLayout>
+
+                <StackLayout Spacing="0">
+                    <!--element-->
+                    <StackLayout Style="{StaticResource AccordionHeader}">
+                        <!--label-->
+                        <Label Text="Supply to DB is from" Style="{StaticResource AccordionHeaderLabel}"/>
+                        <forms:CachedImage x:Name="arrow3" Source="arrowDown.png" Style="{StaticResource AccordionHeaderArrow}"/>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer
+                            Tapped="TapGestureRecognizerx3_OnTapped">
+                            </TapGestureRecognizer>
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+                    <StackLayout x:Name="SupplyToDBIsFrom" HeightRequest="0" Scale="0" BackgroundColor="White">
+                        <!--area-->
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="Board Reference" Style="{StaticResource UpperLabel}"/>
+                            <Entry Grid.Row="1" Text="{Binding Board.BoardSupplySourceReference}" Style="{StaticResource LowerEntry}"/>
+                        </Grid>
+              
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="Board suffix" Style="{StaticResource UpperLabel}"/>
+                            <!--<Entry Grid.Row="1" Text="{Binding Board.BoardSupplyCircuitReference}" Style="{StaticResource LowerEntry}"/>-->
+                            <Picker Grid.Row="1" ItemsSource="{Binding BoardReferenceTypes}" Style="{StaticResource LowerPicker}" ItemDisplayBinding="{Binding BoardReferenceType}" SelectedItem="{Binding SelectedBoardReferenceType}"/>
+                        </Grid>
+                 
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="Circuit Number" Style="{StaticResource UpperLabel}"/>
+                            <Entry Grid.Row="1" Keyboard="Numeric" Text="{Binding Board.BoardSupplyCircuitReference}" Style="{StaticResource LowerEntry}"/>
+                        </Grid>
+                    
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="Supply Cable Size" Style="{StaticResource UpperLabel}"/>
+                            <Entry Grid.Row="1" Text="{Binding Board.BoardSupplyConductorSize}" Style="{StaticResource LowerEntry}"/>
+                        </Grid>
+            
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="Supply Cable Type" Style="{StaticResource UpperLabel}"/>
+                            <!--<Entry Grid.Row="1" Text="{Binding Board.BoardSupplyCircuitConductorSizeType}" Style="{StaticResource LowerEntry}"/>-->
+                            <Picker Grid.Row="1" ItemsSource="{Binding ConductorSizeTypes}" Style="{StaticResource LowerPicker}" ItemDisplayBinding="{Binding ConductorSizeTypeRepresentation}" SelectedItem="{Binding SelectedConductorSizeType}"/>
+                        </Grid>
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="Other" Style="{StaticResource UpperLabel}"/>
+                            <Entry Grid.Row="1" IsEnabled="{Binding IsOther}" Text="{Binding Board.BoardSupplyCircuitConductorSizeTypeOther}" Style="{StaticResource LowerEntry}"/>
+                        </Grid>
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="CircuitPhase" Style="{StaticResource UpperLabel}"/>
+                            <Entry Grid.Row="1" Text="{Binding Board.BoardSupplyCircuitConductorSizeTypeOther}" Style="{StaticResource LowerEntry}"/>
+                        </Grid>
+
+                    </StackLayout>
+                </StackLayout>
+
+                <StackLayout Spacing="0">
+                    <!--element-->
+                    <StackLayout Style="{StaticResource AccordionHeader}">
+                        <!--label-->
+                        <Label Text="Overcurrent Protection Device for Distribution Circuit" Style="{StaticResource AccordionHeaderLabel}"/>
+                        <forms:CachedImage x:Name="arrow4" Source="arrowDown.png" Style="{StaticResource AccordionHeaderArrow}"/>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Tapped="TapGestureRecognizerx4_OnTapped">
+                            </TapGestureRecognizer>
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+                    <StackLayout x:Name="OvercurrentProtectionDevice" HeightRequest="0" Scale="0" BackgroundColor="White">
+                        <!--area-->
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="Search BS(EN)" Style="{StaticResource UpperLabel}"/>
+                            <Entry Grid.Row="1" Text="{Binding BsenSearch}" Style="{StaticResource LowerEntry}">
+                                <Entry.Behaviors>
+                                    <behaviors:EventToCommandBehavior EventName="TextChanged" Command="{Binding BsenSearchChanged}" />
+                                </Entry.Behaviors>
+                            </Entry>
+                        </Grid>
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="BS(EN)" Style="{StaticResource UpperLabel}"/>
+                            <Picker Grid.Row="1" ItemsSource="{Binding BsenTypes}" Style="{StaticResource LowerPicker}" SelectedItem="{Binding SelectedBsenType}" ItemDisplayBinding="{Binding Representation}"/>
+                        </Grid>
+
+                        <!--<Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="Search Rating" Style="{StaticResource UpperLabel}"/>
+                            <Entry Grid.Row="1" Text="{Binding RatingSearch}" Style="{StaticResource LowerEntry}">
+                                <Entry.Behaviors>
+                                    <behaviors:EventToCommandBehavior EventName="TextChanged" Command="{Binding RatingSearchChanged}" />
+                                </Entry.Behaviors>
+                            </Entry>
+                        </Grid>-->
+
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="Rating" Style="{StaticResource UpperLabel}"/>
+                            <Picker Grid.Row="1" ItemsSource="{Binding Ratings}" Style="{StaticResource LowerPicker}" SelectedItem="{Binding SelectedRating}"/>
+                        </Grid>
+
+                    </StackLayout>
+                </StackLayout>
+
+                <StackLayout Spacing="0">
+                    <!--element-->
+                    <StackLayout Style="{StaticResource AccordionHeader}">
+                        <!--label-->
+                        <Label Text="Associated RCD (if any)" Style="{StaticResource AccordionHeaderLabel}"/>
+                        <forms:CachedImage x:Name="arrow5" Source="arrowDown.png" Style="{StaticResource AccordionHeaderArrow}"/>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Tapped="TapGestureRecognizerx5_OnTapped">
+                            </TapGestureRecognizer>
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+                    <StackLayout x:Name="AssociatedRCD" HeightRequest="0" Scale="0" BackgroundColor="White">
+                        <!--area-->
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="5*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="BS(EN)" Style="{StaticResource UpperLabel}"/>
+                            <Entry Grid.Row="1" Grid.Column="0" Text="{Binding RcdType}" Style="{StaticResource LowerEntry}"/>
+                            <Grid Grid.Row="1" Grid.Column="1">
+                                <forms:CachedImage Source="dots.png" HeightRequest="30" VerticalOptions="Start"/>
+                                <Picker x:Name="RcdTypePicker" IsVisible="False" ItemsSource="{Binding RcdTypes}" Style="{StaticResource LowerPicker}" ItemDisplayBinding="{Binding RcdType}" SelectedItem="{Binding SelectedRcdType}"/>
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="TapGestureRecognizer1_OnTapped"/>
+                                </Grid.GestureRecognizers>
+                            </Grid>
+                        </Grid>
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="RCD no of Poles" Style="{StaticResource UpperLabel}"/>
+                            <Entry Grid.Row="1" Keyboard="Numeric" Text="{Binding Board.BoardRcdPoles}" Style="{StaticResource LowerEntry}"/>
+                        </Grid>
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="5*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Grid.Row="0" Text="RCD Rating IΔn" Style="{StaticResource UpperLabel}"/>
+                            <Entry Grid.Row="1" Keyboard="Numeric" Grid.Column="0" Text="{Binding RcdOpCurrent}" Style="{StaticResource LowerEntry}"/>
+                            <Grid Grid.Row="1" Grid.Column="1">
+                                <forms:CachedImage Source="dots.png" HeightRequest="30" VerticalOptions="Start"/>
+                                <Picker x:Name="RcdOpCurrentPicker" IsVisible="False" ItemsSource="{Binding RcdOpCurrents}" Style="{StaticResource LowerPicker}" ItemDisplayBinding="{Binding RcdOpCurrent}" SelectedItem="{Binding SelectedRcdOpCurrent}"/>
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="TapGestureRecognizer2_OnTapped"/>
+                                </Grid.GestureRecognizers>
+                            </Grid>
+                        </Grid>
+
+                    </StackLayout>
+                </StackLayout>
+
+                <StackLayout Spacing="0">
+                    <!--element-->
+                    <StackLayout Style="{StaticResource AccordionHeader}">
+                        <!--label-->
+                        <Label Text="Other Info" Style="{StaticResource AccordionHeaderLabel}"/>
+                        <forms:CachedImage x:Name="arrow6" Source="arrowDown.png" Style="{StaticResource AccordionHeaderArrow}"/>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Tapped="TapGestureRecognizerx6_OnTapped">
+                            </TapGestureRecognizer>
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+                    <StackLayout x:Name="OtherInfo" HeightRequest="0" Scale="0" BackgroundColor="White">
+                        <!--area-->
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="Next Thermographic Survey Date" Style="{StaticResource UpperLabel}"/>
+                            <controls:DatePickerButton Grid.Row="1" Date="{Binding Board.BoardNextThermoDate}" Style="{StaticResource LowerDatePicker}"/>
+                        </Grid>
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="Last Thermographic Survey Date" Style="{StaticResource UpperLabel}"/>
+                            <controls:DatePickerButton Grid.Row="1" Date="{Binding Board.BoardLastThermoDate}" Style="{StaticResource LowerDatePicker}"/>
+                        </Grid>
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="Asset Number" Style="{StaticResource UpperLabel}"/>
+                            <Entry Grid.Row="1" Text="{Binding Board.BoardAssetNumber}" Style="{StaticResource LowerEntry}"/>
+                        </Grid>
+
+                    </StackLayout>
+                </StackLayout>
+
+                <StackLayout Spacing="0">
+                    <!--element-->
+                    <StackLayout Style="{StaticResource AccordionHeader}">
+                        <!--label-->
+                        <Label Text="Comments" Style="{StaticResource AccordionHeaderLabel}"/>
+                        <forms:CachedImage x:Name="arrow7" Source="arrowDown.png" Style="{StaticResource AccordionHeaderArrow}"/>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Tapped="TapGestureRecognizerx7_OnTapped">
+                            </TapGestureRecognizer>
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+                    <StackLayout x:Name="Comments" HeightRequest="0" Scale="0" BackgroundColor="White">
+                        <!--area-->
+                        <Grid Style="{StaticResource ItemGrid}" HeightRequest="100">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="Comments" Style="{StaticResource UpperLabel}"/>
+                            <Editor Grid.Row="1" Text="{Binding Board.BoardComments}" Style="{StaticResource LowerEditor}"/>
+                        </Grid>
+                    </StackLayout>
+                </StackLayout>
+
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

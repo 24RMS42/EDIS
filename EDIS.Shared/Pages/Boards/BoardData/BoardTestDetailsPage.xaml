@@ -1,0 +1,306 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:controls="clr-namespace:Messier16.Forms.Controls;assembly=Messier16.Forms.Controls"
+             xmlns:controls1="clr-namespace:EDIS.Shared.Controls;assembly=EDIS.Shared"
+             xmlns:models="clr-namespace:EDIS.Shared.Models;assembly=EDIS.Shared"
+             x:Class="EDIS.Shared.Pages.Boards.BoardData.BoardTestDetailsPage">
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Save" Command="{Binding Save}"/>
+    </ContentPage.ToolbarItems>
+    
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Padding="10">
+
+                <StackLayout Spacing="0">
+                    <StackLayout Style="{StaticResource AccordionHeader}">
+                        <!--label-->
+                        <Label Text="Zs(Ω) and Ipf (KA) at DB" Style="{StaticResource AccordionHeaderLabel}"/>
+                        <forms:CachedImage x:Name="arrow1" Source="arrowDown.png" Style="{StaticResource AccordionHeaderArrow}"/>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Tapped="TapGestureRecognizerx1_OnTapped">
+                            </TapGestureRecognizer>
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+                    <StackLayout x:Name="ZsAndIpf" HeightRequest="0" Scale="0" BackgroundColor="White">
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="Zs at DB (Ω)" Style="{StaticResource UpperLabel}"/>
+                            <Entry Grid.Row="1" Keyboard="Numeric" Text="{Binding Board.BoardEarthLoop}" Style="{StaticResource LowerEntry}"/>
+                        </Grid>
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="Ipf at DB (KA)" Style="{StaticResource UpperLabel}"/>
+                            <Entry Grid.Row="1" Keyboard="Numeric" Text="{Binding Board.BoardPssc}" Style="{StaticResource LowerEntry}"/>
+                        </Grid>
+                    </StackLayout>
+                </StackLayout>
+
+                <StackLayout Spacing="0">
+                    <StackLayout Style="{StaticResource AccordionHeader}">
+                        <!--label-->
+                        <Label Text="Polarity, Phase and Vulnerability Check" Style="{StaticResource AccordionHeaderLabel}"/>
+                        <forms:CachedImage x:Name="arrow4" Source="arrowDown.png" Style="{StaticResource AccordionHeaderArrow}"/>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Tapped="TapGestureRecognizerx4_OnTapped">
+                            </TapGestureRecognizer>
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+                    <StackLayout x:Name="PolarityPhaseVulnerability" HeightRequest="0" Scale="0" BackgroundColor="White">
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="Polarity confirmed satisfactory" Style="{StaticResource UpperLabel}"/>
+                            <Picker Grid.Row="1" Style="{StaticResource LowerPicker}" ItemDisplayBinding="{Binding Text}" SelectedIndex="{Binding SelectedPolarity}" >
+                                <Picker.ItemsSource>
+                                    <x:Array Type="{x:Type models:PolarityValue}">
+                                        <models:PolarityValue>
+                                            <models:PolarityValue.Text>
+                                                <x:String></x:String>
+                                            </models:PolarityValue.Text>
+                                            <models:PolarityValue.Value>0</models:PolarityValue.Value>
+                                        </models:PolarityValue>
+
+                                        <models:PolarityValue>
+                                            <models:PolarityValue.Text>&#10004;</models:PolarityValue.Text>
+                                            <models:PolarityValue.Value>1</models:PolarityValue.Value>
+                                        </models:PolarityValue>
+
+                                        <models:PolarityValue>
+                                            <models:PolarityValue.Text>&#10008;</models:PolarityValue.Text>
+                                            <models:PolarityValue.Value>2</models:PolarityValue.Value>
+                                        </models:PolarityValue>
+
+                                        <models:PolarityValue>
+                                            <models:PolarityValue.Text>LIM</models:PolarityValue.Text>
+                                            <models:PolarityValue.Value>3</models:PolarityValue.Value>
+                                        </models:PolarityValue>
+
+                                        <models:PolarityValue>
+                                            <models:PolarityValue.Text>N/A</models:PolarityValue.Text>
+                                            <models:PolarityValue.Value>4</models:PolarityValue.Value>
+                                        </models:PolarityValue>
+
+                                    </x:Array>
+                                </Picker.ItemsSource>
+                            </Picker>
+                        </Grid>
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="Phase sequence confirmed satisfactory" Style="{StaticResource UpperLabel}"/>
+                            <Picker Grid.Row="1" Style="{StaticResource LowerPicker}" ItemDisplayBinding="{Binding Text}" SelectedIndex="{Binding SelectedPhase}" >
+                                <Picker.ItemsSource>
+                                    <x:Array Type="{x:Type models:PolarityValue}">
+                                        <models:PolarityValue>
+                                            <models:PolarityValue.Text>
+                                                <x:String></x:String>
+                                            </models:PolarityValue.Text>
+                                            <models:PolarityValue.Value>0</models:PolarityValue.Value>
+                                        </models:PolarityValue>
+
+                                        <models:PolarityValue>
+                                            <models:PolarityValue.Text>&#10004;</models:PolarityValue.Text>
+                                            <models:PolarityValue.Value>1</models:PolarityValue.Value>
+                                        </models:PolarityValue>
+
+                                        <models:PolarityValue>
+                                            <models:PolarityValue.Text>&#10008;</models:PolarityValue.Text>
+                                            <models:PolarityValue.Value>2</models:PolarityValue.Value>
+                                        </models:PolarityValue>
+
+                                        <models:PolarityValue>
+                                            <models:PolarityValue.Text>LIM</models:PolarityValue.Text>
+                                            <models:PolarityValue.Value>3</models:PolarityValue.Value>
+                                        </models:PolarityValue>
+
+                                        <models:PolarityValue>
+                                            <models:PolarityValue.Text>N/A</models:PolarityValue.Text>
+                                            <models:PolarityValue.Value>4</models:PolarityValue.Value>
+                                        </models:PolarityValue>
+
+                                    </x:Array>
+                                </Picker.ItemsSource>
+                            </Picker>
+                        </Grid>
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="Equipment vulnerable to damage" Style="{StaticResource UpperLabel}"/>
+                            <Entry Grid.Row="1" Text="{Binding Board.CircuitsEquipmentVulnerableDetails}" Style="{StaticResource LowerEntry}"/>
+                        </Grid>
+                    </StackLayout>
+                </StackLayout>
+
+                <StackLayout Spacing="0">
+                    <StackLayout Style="{StaticResource AccordionHeader}">
+                        <!--label-->
+                        <Label Text="Test instruments" Style="{StaticResource AccordionHeaderLabel}"/>
+                        <forms:CachedImage x:Name="arrow2" Source="arrowDown.png" Style="{StaticResource AccordionHeaderArrow}"/>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Tapped="TapGestureRecognizerx2_OnTapped">
+                            </TapGestureRecognizer>
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+                    <StackLayout x:Name="Test" HeightRequest="0" Scale="0" BackgroundColor="White">
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="Earth fault loop impedance" Style="{StaticResource UpperLabel}"/>
+                            <Entry Grid.Row="1" Text="{Binding Board.TestInstrumentEarthLoop}" Style="{StaticResource LowerEntry}"/>
+                        </Grid>
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="Insulation resistance" Style="{StaticResource UpperLabel}"/>
+                            <Entry Grid.Row="1" Text="{Binding Board.TestInstrumentInsulationResistance}" Style="{StaticResource LowerEntry}"/>
+                        </Grid>
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="Continuity" Style="{StaticResource UpperLabel}"/>
+                            <Entry Grid.Row="1" Text="{Binding Board.TestInstrumentContinuity}" Style="{StaticResource LowerEntry}"/>
+                        </Grid>
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="RCD" Style="{StaticResource UpperLabel}"/>
+                            <Entry Grid.Row="1" Text="{Binding Board.TestInstrumentRcd}" Style="{StaticResource LowerEntry}"/>
+                        </Grid>
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="Other serial number - 1" Style="{StaticResource UpperLabel}"/>
+                            <Entry Grid.Row="1" Text="{Binding Board.TestInstrumentOther1}" Style="{StaticResource LowerEntry}"/>
+                        </Grid>
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="Other serial number - 2" Style="{StaticResource UpperLabel}"/>
+                            <Entry Grid.Row="1" Text="{Binding Board.TestInstrumentOther2}" Style="{StaticResource LowerEntry}"/>
+                        </Grid>
+                    </StackLayout>
+                </StackLayout>
+
+                <StackLayout Spacing="0">
+                    <StackLayout Style="{StaticResource AccordionHeader}">
+                        <!--label-->
+                        <Label Text="Tester and date" Style="{StaticResource AccordionHeaderLabel}"/>
+                        <forms:CachedImage x:Name="arrow3" Source="arrowDown.png" Style="{StaticResource AccordionHeaderArrow}"/>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer
+                                    Tapped="TapGestureRecognizerx3_OnTapped">
+                            </TapGestureRecognizer>
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+                    <StackLayout x:Name="TesterAndDate" HeightRequest="0" Scale="0" BackgroundColor="White">
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="Tester" Style="{StaticResource UpperLabel}"/>
+                            <Entry Grid.Row="1" Text="{Binding Board.BoardTestedByName}" Style="{StaticResource LowerEntry}"/>
+                        </Grid>
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="Position" Style="{StaticResource UpperLabel}"/>
+                            <Entry Grid.Row="1" Text="{Binding Board.BoardTestedByPost}" Style="{StaticResource LowerEntry}"/>
+                        </Grid>
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="Date of testing" Style="{StaticResource UpperLabel}"/>
+                            <controls1:DatePickerButton Grid.Row="1" Date="{Binding Board.BoardTestedDate}" Style="{StaticResource LowerDatePicker}"/>
+                        </Grid>
+
+                        <Grid Style="{StaticResource ItemGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="Board next test date" Style="{StaticResource UpperLabel}"/>
+                            <controls1:DatePickerButton Grid.Row="1" Date="{Binding Board.BoardNextTestDate}" Style="{StaticResource LowerDatePicker}"/>
+                        </Grid>
+                    </StackLayout>
+                </StackLayout>
+
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

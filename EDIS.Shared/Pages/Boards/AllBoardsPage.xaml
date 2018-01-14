@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:Messier16.Forms.Controls;assembly=Messier16.Forms.Controls"
+             x:Class="EDIS.Shared.Pages.Boards.AllBoardsPage"
+             Title="Boards on cloud">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="ItemLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="Gray"/>
+                <Setter Property="FontSize" Value="10"/>
+            </Style>
+            <Style x:Key="ItemValue" TargetType="Label">
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="FontSize" Value="10"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+            </Style>
+            <Style x:Key="ItemStack" TargetType="StackLayout">
+                <Setter Property="Orientation" Value="Horizontal"/>
+            </Style>
+            <Style TargetType="controls:Checkbox">
+                <Setter Property="CheckboxBackgroundColor" Value="Orange"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <ListView x:Name="AllBoardsList"
+                  ItemsSource="{Binding Boards}"
+                  VerticalOptions="FillAndExpand"
+                  RowHeight="70"
+                  SeparatorVisibility="None"
+                      BackgroundColor="Transparent">
+
+                <x:Arguments>
+                    <ListViewCachingStrategy>RecycleElement</ListViewCachingStrategy>
+                </x:Arguments>
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell x:Name="_listItem">
+                            <Frame Padding="0"
+                                   Margin="5"
+                                   HasShadow="False"
+                                   BackgroundColor="White">
+                            <Grid Padding="5"
+                                  VerticalOptions="CenterAndExpand">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="4*"/>
+                                    <ColumnDefinition Width="4*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <!--<RowDefinition Height="1"/>-->
+                                </Grid.RowDefinitions>
+
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer BindingContext="{Binding Source={x:Reference AllBoardsList}, Path=BindingContext}"
+                                                          Command="{Binding BoardSelectedCommand}"
+                                                          CommandParameter="{Binding Source={x:Reference _listItem}, Path=BindingContext}"/>
+                                </Grid.GestureRecognizers>
+
+                                <controls:Checkbox Checked="{Binding IsSelected}"
+                                                   Grid.Column="0"
+                                                   Grid.Row="0"
+                                                   Grid.RowSpan="2"
+                                                   VerticalOptions="CenterAndExpand"/>
+
+                                    <StackLayout Grid.Column="1"
+                                             Grid.Row="0"
+                                             Style="{StaticResource ItemStack}">
+                                        <Label Text="Board Ref:"
+                                           Style="{StaticResource ItemLabel}"/>
+
+                                        <Label Text="{Binding Board.BoardIdentity}"
+                                           Style="{StaticResource ItemValue}"/>
+                                    </StackLayout>
+                                    <StackLayout Grid.Column="1"
+                                             Grid.Row="1"
+                                             Style="{StaticResource ItemStack}">
+                                    <Label Text="Section"
+                                           Style="{StaticResource ItemLabel}"/>
+
+                                    <Label Text="{Binding Board.BoardLocationBlock}"
+                                           Style="{StaticResource ItemValue}"/>
+                                </StackLayout>
+                                <StackLayout Grid.Column="2"
+                                             Grid.Row="1"
+                                             Style="{StaticResource ItemStack}">
+                                    <Label Text="Floor"
+                                           Style="{StaticResource ItemLabel}"/>
+
+                                    <Label Text="{Binding Board.BoardLocationFloor}"
+                                           Style="{StaticResource ItemValue}"/>
+                                </StackLayout>
+
+                                <!--<BoxView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" WidthRequest="1000" HeightRequest="1" BackgroundColor="#dfdfdf" VerticalOptions="EndAndExpand"/>-->
+
+                            </Grid>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+            </ListView>
+
+            <Button Style="{StaticResource AppButton}" Text="Import Boards" Command="{Binding ImportBoardsCommand}" VerticalOptions="End"/>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

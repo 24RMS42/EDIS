@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:base="clr-namespace:EDIS.Shared.ViewModels.Base;assembly=EDIS.Shared"
+             x:Class="EDIS.Shared.Pages.Misc.MenuPage"
+             Title="EDIS Mobile">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="MenuItem" TargetType="TextCell">
+                <Setter Property="TextColor" Value="Black"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView>
+    <StackLayout VerticalOptions="FillAndExpand" 
+                 Spacing="0">
+
+        <StackLayout Padding="20,40,20,20"
+                     BackgroundColor="White"
+                     Spacing="10">
+            <forms:CachedImage Source="logo.png" />
+                <Label  Text="{Binding ApiEndPoint}"/>
+                <Label  Text="{Binding AppVersion, StringFormat='Version: {0}'}"/>
+                <Label  Text="{Binding User.UserFullname}"/>
+        </StackLayout>
+
+            <StackLayout BackgroundColor="#f2f2f2" 
+                     VerticalOptions="FillAndExpand"
+                     Padding="20,40,20,20"
+                     Spacing="25">
+
+                <Grid>
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding OpenLoginPage}"/>
+                    </Grid.GestureRecognizers>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="6*"/>
+                    </Grid.ColumnDefinitions>
+                    <forms:CachedImage HeightRequest="15" Grid.Column="0" Source="login.png"/>
+                    <Label VerticalTextAlignment="Center" Grid.Column="1" Text="LOGIN"/>
+                </Grid>
+
+                <Grid>
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding OpenEstatesPage}"/>
+                    </Grid.GestureRecognizers>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="6*"/>
+                    </Grid.ColumnDefinitions>
+                    <forms:CachedImage HeightRequest="15" Grid.Column="0" Source="building.png"/>
+                    <Label VerticalTextAlignment="Center" Grid.Column="1" Text="ESTATES"/>
+                </Grid>
+
+                <Grid>
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding OpenBuildingsPage}"/>
+                    </Grid.GestureRecognizers>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="6*"/>
+                    </Grid.ColumnDefinitions>
+                    <forms:CachedImage HeightRequest="15" Grid.Column="0" Source="building.png"/>
+                    <Label VerticalTextAlignment="Center" Grid.Column="1" Text="BUILDINGS"/>
+                </Grid>
+
+                <Grid>
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding OpenCertificatesPage}"/>
+                    </Grid.GestureRecognizers>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="6*"/>
+                    </Grid.ColumnDefinitions>
+                    <forms:CachedImage HeightRequest="15" Grid.Column="0" Source="certificate.png"/>
+                    <Label VerticalTextAlignment="Center" Grid.Column="1" Text="CERTIFICATES"/>
+                </Grid>
+
+                <Grid>
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding UserDataCommand}"/>
+                    </Grid.GestureRecognizers>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="6*"/>
+                    </Grid.ColumnDefinitions>
+                    <forms:CachedImage HeightRequest="15" Grid.Column="0" Source="building.png"/>
+                    <Label VerticalTextAlignment="Center" Grid.Column="1" Text="IMPORT USER PROFILE"/>
+                </Grid>
+
+                <Grid>
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding OpenProfilePage}"/>
+                    </Grid.GestureRecognizers>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="6*"/>
+                    </Grid.ColumnDefinitions>
+                    <forms:CachedImage HeightRequest="15" Grid.Column="0" Source="building.png"/>
+                    <Label VerticalTextAlignment="Center" Grid.Column="1" Text="VIEW USER PROFILE DATA"/>
+                </Grid>
+
+                <Grid>
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding OpenSettingsPage}"/>
+                    </Grid.GestureRecognizers>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="6*"/>
+                    </Grid.ColumnDefinitions>
+                    <forms:CachedImage HeightRequest="15" Grid.Column="0" Source="settings.png"/>
+                    <Label VerticalTextAlignment="Center" Grid.Column="1" Text="Settings"/>
+                </Grid>
+
+
+
+            </StackLayout>
+
+        </StackLayout>
+    </ScrollView>
+
+</ContentPage>
